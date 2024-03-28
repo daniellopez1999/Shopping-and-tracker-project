@@ -35,16 +35,18 @@ export class ProductsMongoose implements ProductModule.ProductsRepository {
     }
   }
 
-  // public async find(id: string): Promise<ProductModule.Product> {
-  //   try {
-  //     return {
-  //       name: res.name,
-  //       description: res.description,
-  //       price: res.price,
-  //       quantity: res.quantity,
-  //     };
-  //   } catch (error) {
+  public async findById(id: string): Promise<ProductModule.Product | null> {
+    try {
+      const product = await Product.findById(id);
 
-  //   }
-  // }
+      if (product) return product;
+      else {
+        return null;
+      }
+    } catch (error) {
+      //@ts-ignore
+      console.error(error);
+      return null;
+    }
+  }
 }

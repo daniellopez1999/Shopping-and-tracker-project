@@ -3,10 +3,11 @@ import { ProductModule } from './types';
 export class ProductClass implements ProductModule.Product {
   private readonly storage: ProductModule.ProductsRepository;
 
-  public name!: string;
-  public description!: string;
-  public price!: number;
-  public quantity!: number;
+  public id: string | undefined;
+  public name: string | undefined;
+  public description: string | undefined;
+  public price: number | undefined;
+  public quantity: number | undefined;
 
   constructor(storage: ProductModule.ProductsRepository) {
     this.storage = storage;
@@ -20,5 +21,11 @@ export class ProductClass implements ProductModule.Product {
       quantity: this.quantity,
     });
     return product;
+  }
+
+  public async find() {
+    const product = await this.storage.findById(this.id!);
+    if (product) return product;
+    else return null;
   }
 }
