@@ -1,6 +1,8 @@
+import { Document, ObjectId, Types } from 'mongoose';
+
 export declare namespace ProductModule {
   interface Product {
-    id?: string;
+    _id?: any;
     name?: string;
     description?: string;
     price?: number;
@@ -23,8 +25,13 @@ export declare namespace ProductModule {
     ): Promise<ProductModule.Product | null>;
     public findById(id: string): Promise<ProductModule.Product | null>;
     public getAllProducts(): Promise<ProductModule.Product[]>;
-    public buyProducts(
+
+    public findProductsToBuy(
       listOfProducts: ListOfProducts[]
-    ): Promise<ProductModule.Product[] | ListOfProductsError>;
+    ): Promise<ProductModule.Product[]>;
+
+    public substractProductsToBuy(
+      listOfProducts: ProductModule.Product[] | undefined
+    ): Promise<ProductModule.Product[]>;
   }
 }

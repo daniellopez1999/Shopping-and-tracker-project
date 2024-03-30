@@ -9,9 +9,34 @@ export class BuyProducts {
 
   public async exec(productsToBuy: ProductModule.ListOfProducts[]) {
     const products = new ProductClass(this.productsDB);
+
     products.listOfProducts = productsToBuy;
 
-    const productsResult = await products.buy();
-    return productsResult;
+    const productsWithoutEnoughQuantity: ProductModule.Product[] = [];
+
+    const productsToBuyList = await products.findProductsToBuy();
+
+    productsToBuyList.forEach((product) => {
+      const productData = productsToBuy.find(
+        (item) => item.id === product._id!.toString()
+      );
+      if (productData!.quantity > product.quantity!) {
+        productsWithoutEnoughQuantity.push(product);
+      } else {
+        product.quantity! -= productData!.quantity;
+      }
+    });
+
+    if (productsWithoutEnoughQuantity.length === 0) {
+      products.listOfProductsToUpdate = productsToBuyList;
+      const substractProductsToBuy = await products.substractProductsToBuy();
+
+      return substractProductsToBuy;
+    } else {
+      return {
+        error: 'The store has not enough quantity of the selected products',
+        products: productsWithoutEnoughQuantity,
+      };
+    }
   }
 }

@@ -20,12 +20,7 @@ export class ProductsMongoose implements ProductModule.ProductsRepository {
 
       if (!product) {
         const res = await Product.create(newProduct);
-        return {
-          name: res.name,
-          description: res.description,
-          price: res.price,
-          quantity: res.quantity,
-        };
+        return res;
       } else {
         return null;
       }
@@ -102,6 +97,47 @@ export class ProductsMongoose implements ProductModule.ProductsRepository {
           products: productsWithoutEnoughQuantity,
         };
       }
+    } catch (error) {
+      console.error(error);
+      //@ts-ignore
+      return { Error: error };
+    }
+  }
+
+  public async findProductsToBuy(
+    listOfProducts: ProductModule.ListOfProducts[]
+  ): Promise<ProductModule.Product[]> {
+    try {
+      const productIds = listOfProducts.map((product) => product.id);
+
+      const products = await Product.find({ _id: { $in: productIds } });
+
+      return products;
+    } catch (error) {
+      console.error(error);
+      //@ts-ignore
+      return { Error: error };
+    }
+  }
+
+  public async substractProductsToBuy(
+    listOfProducts: ProductModule.Product[]
+  ): Promise<ProductModule.Product[]> {
+    try {
+      await Product.bulkWrite(
+        listOfProducts.map((product) => ({
+          updateOne: {
+            filter: { _id: product._id },
+            update: { $set: { quantity: product.quantity } },
+          },
+        }))
+      );
+
+      const updatedProducts = await Product.find({
+        _id: { $in: listOfProducts.map((product) => product._id) },
+      });
+
+      return updatedProducts;
     } catch (error) {
       console.error(error);
       //@ts-ignore

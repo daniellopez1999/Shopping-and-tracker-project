@@ -13,7 +13,7 @@ export class CreateProduct {
     product.price = productSettings.price;
     product.quantity = productSettings.quantity;
 
-    const productSave = await product.save();
+    const productSave = await product.saveProduct();
 
     return productSave;
   }

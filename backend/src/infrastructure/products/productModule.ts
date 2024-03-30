@@ -9,12 +9,13 @@ export class ProductClass implements ProductModule.Product {
   public price: number | undefined;
   public quantity: number | undefined;
   public listOfProducts: ProductModule.ListOfProducts[] | undefined;
+  public listOfProductsToUpdate: ProductModule.Product[] | undefined;
 
   constructor(storage: ProductModule.ProductsRepository) {
     this.storage = storage;
   }
 
-  public async save() {
+  public async saveProduct(): Promise<ProductModule.Product | null> {
     const product = await this.storage.save({
       name: this.name,
       description: this.description,
@@ -35,8 +36,18 @@ export class ProductClass implements ProductModule.Product {
     return products;
   }
 
-  public async buy() {
-    const products = await this.storage.buyProducts(this.listOfProducts!);
-    return products;
+  public async findProductsToBuy() {
+    const productsToBuy = await this.storage.findProductsToBuy(
+      this.listOfProducts!
+    );
+
+    return productsToBuy;
+  }
+
+  public async substractProductsToBuy() {
+    const productsToBuy = await this.storage.substractProductsToBuy(
+      this.listOfProductsToUpdate!
+    );
+    return productsToBuy;
   }
 }
