@@ -10,8 +10,6 @@ export class BuyProducts {
   public async exec(productsToBuy: ProductModule.ListOfProducts[]) {
     const products = new ProductClass(this.productsDB);
     products.listOfProducts = productsToBuy;
-    console.log(productsToBuy);
-    console.log(products);
 
     const productsResult = await products.buy();
     return productsResult;
