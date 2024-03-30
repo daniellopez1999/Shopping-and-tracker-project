@@ -28,4 +28,9 @@ export class ProductClass implements ProductModule.Product {
     if (product) return product;
     else return null;
   }
+
+  public async getAll() {
+    const products = await this.storage.getAllProducts();
+    return products;
+  }
 }

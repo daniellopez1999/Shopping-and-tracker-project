@@ -11,5 +11,6 @@ export declare namespace ProductModule {
       input: Partial<ProductModule.Product>
     ): Promise<ProductModule.Product | null>;
     public findById(id: string): Promise<ProductModule.Product | null>;
+    public getAllProducts(): Promise<ProductModule.Product[]>;
   }
 }

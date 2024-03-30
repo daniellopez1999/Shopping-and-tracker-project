@@ -49,4 +49,15 @@ export class ProductsMongoose implements ProductModule.ProductsRepository {
       return null;
     }
   }
+
+  public async getAllProducts(): Promise<ProductModule.Product[]> {
+    try {
+      const products = await Product.find();
+      return products;
+    } catch (error) {
+      console.error(error);
+      //@ts-ignore
+      return { Error: error };
+    }
+  }
 }
