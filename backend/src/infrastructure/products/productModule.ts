@@ -8,6 +8,7 @@ export class ProductClass implements ProductModule.Product {
   public description: string | undefined;
   public price: number | undefined;
   public quantity: number | undefined;
+  public listOfProducts: ProductModule.ListOfProducts[] | undefined;
 
   constructor(storage: ProductModule.ProductsRepository) {
     this.storage = storage;
@@ -31,6 +32,11 @@ export class ProductClass implements ProductModule.Product {
 
   public async getAll() {
     const products = await this.storage.getAllProducts();
+    return products;
+  }
+
+  public async buy() {
+    const products = await this.storage.buyProducts(this.listOfProducts!);
     return products;
   }
 }

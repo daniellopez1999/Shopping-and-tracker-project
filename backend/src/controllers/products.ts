@@ -3,6 +3,7 @@ import { ProductsMongoose } from '../infrastructure/products/repositories/produc
 import { CreateProduct } from '../services/productCases/createProduct';
 import { FindProduct } from '../services/productCases/getProductById';
 import { GetAllProduicts } from '../services/productCases/getAllProducts';
+import { BuyProducts } from '../services/productCases/buyProducts';
 
 export class Products {
   static async getById(req: Request, res: Response) {
@@ -45,6 +46,23 @@ export class Products {
       const product = await createProduct.exec(body);
 
       return res.status(200).json(product);
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ Error: error });
+    }
+  }
+
+  static async buyProducts(req: Request, res: Response) {
+    try {
+      const productsToBuy = req.body;
+
+      console.log(productsToBuy);
+      const productsDB = new ProductsMongoose();
+      const buyProduct = new BuyProducts(productsDB);
+
+      const product = await buyProduct.exec(productsToBuy);
+
+      return res.status(200).json({ product });
     } catch (error) {
       console.log(error);
       return res.status(400).json({ Error: error });
