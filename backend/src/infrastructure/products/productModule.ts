@@ -52,4 +52,9 @@ export class ProductClass implements ProductModule.Product {
     );
     return productsToBuy;
   }
+
+  public async findProductsByType() {
+    const products = await this.storage.findProductsByType(this.type!);
+    return products;
+  }
 }

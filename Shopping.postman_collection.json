@@ -28,6 +28,28 @@
 			"response": []
 		},
 		{
+			"name": "getProductsByType",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products/products-type/Snack",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"products-type",
+						"Snack"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "getAllProducts",
 			"request": {
 				"method": "GET",
@@ -61,7 +83,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Monster saranpion\",\r\n    \"description\": \"Bebida energetica con azucar\",\r\n    \"price\": 1.89,\r\n    \"quantity\": 40\r\n}",
+					"raw": "{\r\n    \"name\": \"Lays Jamon\",\r\n    \"description\": \"Patatas de bolsa sabor jamon\",\r\n    \"price\": 1.60,\r\n    \"quantity\": 30,\r\n    \"type\": \"Snack\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

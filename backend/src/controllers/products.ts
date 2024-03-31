@@ -4,6 +4,7 @@ import { CreateProduct } from '../services/productCases/createProduct';
 import { FindProduct } from '../services/productCases/getProductById';
 import { GetAllProduicts } from '../services/productCases/getAllProducts';
 import { BuyProducts } from '../services/productCases/buyProducts';
+import { GetProductsByType } from '../services/productCases/getProductsByType';
 
 export class Products {
   static async getById(req: Request, res: Response) {
@@ -72,7 +73,12 @@ export class Products {
     try {
       const { type } = req.params;
 
-      return res.status(200).json({ type });
+      const productsDB = new ProductsMongoose();
+      const findProducts = new GetProductsByType(productsDB);
+
+      const products = await findProducts.exec(type);
+
+      return res.status(200).json({ products });
     } catch (error) {
       console.log(error);
       return res.status(400).json({ Error: error });

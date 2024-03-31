@@ -146,4 +146,18 @@ export class ProductsMongoose implements ProductModule.ProductsRepository {
       return { Error: error };
     }
   }
+
+  public async findProductsByType(
+    type: string
+  ): Promise<ProductModule.Product[]> {
+    try {
+      const products = await Product.find({ type: type });
+
+      return products;
+    } catch (error) {
+      console.error(error);
+      //@ts-ignore
+      return { Error: error };
+    }
+  }
 }

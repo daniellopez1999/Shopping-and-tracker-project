@@ -34,5 +34,7 @@ export declare namespace ProductModule {
     public substractProductsToBuy(
       listOfProducts: ProductModule.Product[] | undefined
     ): Promise<ProductModule.Product[]>;
+
+    public findProductsByType(type: string): Promise<ProductModule.Product[]>;
   }
 }
