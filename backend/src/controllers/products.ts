@@ -56,13 +56,23 @@ export class Products {
     try {
       const productsToBuy = req.body;
 
-      console.log(productsToBuy);
       const productsDB = new ProductsMongoose();
       const buyProduct = new BuyProducts(productsDB);
 
       const product = await buyProduct.exec(productsToBuy);
 
       return res.status(200).json({ product });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ Error: error });
+    }
+  }
+
+  static async findProductsByType(req: Request, res: Response) {
+    try {
+      const { type } = req.params;
+
+      return res.status(200).json({ type });
     } catch (error) {
       console.log(error);
       return res.status(400).json({ Error: error });

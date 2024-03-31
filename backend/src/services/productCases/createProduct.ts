@@ -12,6 +12,7 @@ export class CreateProduct {
     product.description = productSettings.description;
     product.price = productSettings.price;
     product.quantity = productSettings.quantity;
+    product.type = productSettings.type;
 
     const productSave = await product.saveProduct();
 

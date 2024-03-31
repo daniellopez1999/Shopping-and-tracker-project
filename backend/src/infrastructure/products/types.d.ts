@@ -7,6 +7,7 @@ export declare namespace ProductModule {
     description?: string;
     price?: number;
     quantity?: number;
+    type?: string;
   }
 
   interface ListOfProducts {
