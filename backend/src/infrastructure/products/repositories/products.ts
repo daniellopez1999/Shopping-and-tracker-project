@@ -67,13 +67,13 @@ export class ProductsMongoose implements ProductModule.ProductsRepository {
     try {
       const productsWithoutEnoughQuantity: ProductModule.Product[] = [];
 
-      const productIds = listOfProducts.map((product) => product.id);
+      const productIds = listOfProducts.map((product) => product._id);
 
       const products = await Product.find({ _id: { $in: productIds } });
 
       products.forEach((product) => {
         const productData = listOfProducts.find(
-          (item) => item.id === product._id.toString()
+          (item) => item._id === product._id.toString()
         );
         if (productData!.quantity > product.quantity) {
           productsWithoutEnoughQuantity.push(product);
@@ -110,7 +110,8 @@ export class ProductsMongoose implements ProductModule.ProductsRepository {
     listOfProducts: ProductModule.ListOfProducts[]
   ): Promise<ProductModule.Product[]> {
     try {
-      const productIds = listOfProducts.map((product) => product.id);
+      console.log(listOfProducts);
+      const productIds = listOfProducts.map((product) => product._id);
 
       const products = await Product.find({ _id: { $in: productIds } });
 

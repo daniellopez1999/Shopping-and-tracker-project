@@ -7,18 +7,19 @@ export class BuyProducts {
     this.productsDB = productsDB;
   }
 
-  public async exec(productsToBuy: ProductModule.ListOfProducts[]) {
+  public async exec(
+    productsToBuy: ProductModule.ListOfProducts[]
+  ): Promise<ProductModule.Product[] | ProductModule.ListOfProductsError> {
     const products = new ProductClass(this.productsDB);
 
     products.listOfProducts = productsToBuy;
 
     const productsWithoutEnoughQuantity: ProductModule.Product[] = [];
-
     const productsToBuyList = await products.findProductsToBuy();
 
     productsToBuyList.forEach((product) => {
       const productData = productsToBuy.find(
-        (item) => item.id === product._id!.toString()
+        (item) => item._id === product._id!.toString()
       );
       if (productData!.quantity > product.quantity!) {
         productsWithoutEnoughQuantity.push(product);

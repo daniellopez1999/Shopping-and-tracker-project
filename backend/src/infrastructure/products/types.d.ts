@@ -11,7 +11,7 @@ export declare namespace ProductModule {
   }
 
   interface ListOfProducts {
-    id: string;
+    _id: string;
     quantity: number;
   }
 
