@@ -6,7 +6,7 @@ async function main() {
   await mongoose.connect(`${process.env.DB_URL}`);
 }
 
-const ProductSchema = new mongoose.Schema({
+export const ProductSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
