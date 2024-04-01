@@ -7,140 +7,207 @@
 	},
 	"item": [
 		{
-			"name": "getProduct",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/products/66046d2aad2944ed70bea16d",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"products",
-						"66046d2aad2944ed70bea16d"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getProductsByType",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/products/products-type/Snack",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"products",
-						"products-type",
-						"Snack"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getAllProducts",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/api/products/all",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"products",
-						"all"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "createProduct",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Lays Jamon\",\r\n    \"description\": \"Patatas de bolsa sabor jamon\",\r\n    \"price\": 1.60,\r\n    \"quantity\": 30,\r\n    \"type\": \"Snack\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Products",
+			"item": [
+				{
+					"name": "getProduct",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/products/66046d2aad2944ed70bea16d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								"66046d2aad2944ed70bea16d"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/api/products/create-product",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"products",
-						"create-product"
-					]
+				{
+					"name": "getProductsByType",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/products/products-type/Snack",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								"products-type",
+								"Snack"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/products/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createProduct",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Lays Jamon\",\r\n    \"description\": \"Patatas de bolsa sabor jamon\",\r\n    \"price\": 1.60,\r\n    \"quantity\": 30,\r\n    \"type\": \"Snack\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/products/create-product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								"create-product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buyProduct",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\r\n    {\r\n        \"_id\": \"660468bd044332a0e3c5f149\",\r\n        \"quantity\": 1\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/products/buy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products",
+								"buy"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "buyProduct",
-			"request": {
-				"method": "PATCH",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "[\r\n    {\r\n        \"id\": \"66046866e7f2f4ec04c85a2c\",\r\n        \"quantity\": 1\r\n    },\r\n    {\r\n        \"id\": \"660468bd044332a0e3c5f149\",\r\n        \"quantity\": 1\r\n    }\r\n]",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Orders",
+			"item": [
+				{
+					"name": "getOrderByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/9292929",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"9292929"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:8080/api/products/buy",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"products",
-						"buy"
-					]
+				{
+					"name": "createOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"products\": [\r\n    {\r\n      \"_id\": \"6609adb93c0a7a6608de1658\",\r\n      \"name\": \"Tortilla Francesa\",\r\n      \"description\": \"Tortilla francesa\",\r\n      \"price\": 2.99,\r\n      \"quantity\": 10,\r\n      \"type\": \"Food\",\r\n      \"__v\": 0\r\n    },\r\n    {\r\n      \"_id\": \"6609add43c0a7a6608de165b\",\r\n      \"name\": \"Lays Jamon\",\r\n      \"description\": \"Patatas de bolsa sabor jamon\",\r\n      \"price\": 1.6,\r\n      \"quantity\": 5,\r\n      \"type\": \"Snack\",\r\n      \"__v\": 0\r\n    }\r\n  ],\r\n  \"user_id\": \"9d1j09d1209ej\",\r\n  \"address\": {\r\n    \"country\": \"Spain\",\r\n    \"city\": \"Montgat\",\r\n    \"zip_code\": \"08390\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/orders/create-order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"create-order"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
