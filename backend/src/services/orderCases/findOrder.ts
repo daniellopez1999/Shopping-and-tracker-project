@@ -9,7 +9,7 @@ export class FindOrder {
 
   public async exec(id: string) {
     const order = new Order(this.ordersDB);
-    order.id = id;
+    order._id = id;
 
     const findOrder = await order.find();
     return findOrder;

@@ -7,6 +7,11 @@ export declare namespace OrderModule {
     user_id?: string;
     address?: Address;
     total_price?: number;
+    status?:
+      | 'PENDING TO BE ACCEPTED'
+      | 'ACCEPTED'
+      | 'ON DELIVERY'
+      | 'COMPLETED';
   }
 
   interface Address {
@@ -19,6 +24,9 @@ export declare namespace OrderModule {
     public findByID(id: string): Promise<OrderModule.Order>;
     public createOrder(
       orderData: OrderModule.Order
+    ): Promise<OrderModule.Order>;
+    public changeOrderStatus(
+      order: OrderModule.Order
     ): Promise<OrderModule.Order>;
   }
 }

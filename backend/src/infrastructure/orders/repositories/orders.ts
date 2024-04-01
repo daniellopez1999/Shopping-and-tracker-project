@@ -25,4 +25,21 @@ export class OrdersMongoose implements OrderModule.OrderRepository {
       return { Error: error };
     }
   }
+
+  public async changeOrderStatus(
+    order: OrderModule.Order
+  ): Promise<OrderModule.Order> {
+    try {
+      const orderWithOldStatus = await Order.findById(order._id);
+
+      if (order.status) orderWithOldStatus!.status = order.status;
+
+      orderWithOldStatus!.save();
+
+      return orderWithOldStatus as unknown as OrderModule.Order;
+    } catch (error) {
+      //@ts-ignore
+      return { Error: error };
+    }
+  }
 }
