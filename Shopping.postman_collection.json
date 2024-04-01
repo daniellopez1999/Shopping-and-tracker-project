@@ -172,6 +172,27 @@
 					"response": []
 				},
 				{
+					"name": "getUnassignedOrders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/orders/unassigned-orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"orders",
+								"unassigned-orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "createOrder",
 					"request": {
 						"method": "POST",
