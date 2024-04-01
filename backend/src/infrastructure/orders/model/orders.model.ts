@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import 'dotenv/config';
-import { ProductSchema } from './products.model';
+import { ProductSchema } from '../../products/model/products.model';
 
 main().catch((err) => console.log(err));
 async function main() {
@@ -13,8 +13,18 @@ const OrderSchema = new mongoose.Schema({
     required: true,
   },
   address: {
-    type: String,
-    required: true,
+    country: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    zip_code: {
+      type: String,
+      required: true,
+    },
   },
   total_price: {
     type: Number,
