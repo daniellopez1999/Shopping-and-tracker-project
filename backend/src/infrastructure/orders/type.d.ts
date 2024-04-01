@@ -28,5 +28,6 @@ export declare namespace OrderModule {
     public changeOrderStatus(
       order: OrderModule.Order
     ): Promise<OrderModule.Order>;
+    public findUnassignedOrders(): Promise<OrderModule.Order[]>;
   }
 }

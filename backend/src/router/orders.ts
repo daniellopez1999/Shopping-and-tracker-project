@@ -3,6 +3,7 @@ import { Orders } from '../controllers/orders';
 
 const ordersRouter = express.Router();
 
+ordersRouter.get('/unassigned-orders', Orders.getUnassignedOrders);
 ordersRouter.get('/:id', Orders.getByID);
 ordersRouter.post('/create-order', Orders.createOrder);
 ordersRouter.patch('/change-status', Orders.changeOrderStatus);

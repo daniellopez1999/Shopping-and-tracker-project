@@ -42,4 +42,15 @@ export class OrdersMongoose implements OrderModule.OrderRepository {
       return { Error: error };
     }
   }
+
+  public async findUnassignedOrders(): Promise<OrderModule.Order[]> {
+    try {
+      const orders = await Order.find({ status: 'PENDING TO BE ACCEPTED' });
+
+      return orders as unknown as OrderModule.Order[];
+    } catch (error) {
+      //@ts-ignore
+      return { Error: error };
+    }
+  }
 }

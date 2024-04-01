@@ -46,4 +46,9 @@ export class Order implements OrderModule.Order {
     });
     return order;
   }
+
+  public async findUnassignedOrders(): Promise<OrderModule.Order[]> {
+    const orders = await this.storage.findUnassignedOrders();
+    return orders;
+  }
 }
