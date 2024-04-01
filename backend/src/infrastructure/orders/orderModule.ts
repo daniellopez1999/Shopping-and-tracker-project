@@ -23,4 +23,9 @@ export class Order implements OrderModule.Order {
     });
     return order;
   }
+
+  public async find(): Promise<OrderModule.Order> {
+    const order = await this.storage.findByID(this.id!);
+    return order;
+  }
 }

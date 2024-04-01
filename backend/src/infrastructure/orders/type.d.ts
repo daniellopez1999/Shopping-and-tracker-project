@@ -16,6 +16,7 @@ export declare namespace OrderModule {
   }
 
   interface OrderRepository {
+    public findByID(id: string): Promise<OrderModule.Order>;
     public createOrder(
       orderData: OrderModule.Order
     ): Promise<OrderModule.Order>;

@@ -19,7 +19,9 @@ export class CreateOrder {
     order.address = address;
 
     let totalPrice = 0;
-    order.products.forEach((product) => (totalPrice += product.price!));
+    order.products.forEach(
+      (product) => (totalPrice += product.price! * product.quantity!)
+    );
 
     order.total_price = totalPrice;
 
