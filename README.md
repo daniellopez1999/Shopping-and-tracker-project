@@ -4,7 +4,7 @@ Objective: Make a shopping products store and tracking orders, with hexagonal ar
 
 ### Tech Stack
 Backend: Node | Express (TypeScript)   
-Frontend: React (TypeScript)
+Frontend: React (TypeScript)   
 Database: MongoDB with Mongoose as ODM
 
 ### Pending
