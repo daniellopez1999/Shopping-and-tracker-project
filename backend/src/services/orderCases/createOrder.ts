@@ -20,6 +20,7 @@ export class CreateOrder {
     order.products = products;
     order.user_id = user_id;
     order.address = address;
+    order.email = user_email;
 
     let totalPrice = 0;
     order.products.forEach(

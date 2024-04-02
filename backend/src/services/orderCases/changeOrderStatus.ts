@@ -1,5 +1,6 @@
 import { Order } from '../../infrastructure/orders/orderModule';
 import { OrderModule } from '../../infrastructure/orders/type';
+import { SendEmail } from '../../infrastructure/sendEmailAPI/sendEmailModule';
 
 export class ChangeOrderStatus {
   private readonly ordersDB: OrderModule.OrderRepository;
@@ -18,6 +19,7 @@ export class ChangeOrderStatus {
     order.address = findOrder.address;
     order.total_price = findOrder.total_price;
     order.status = findOrder.status;
+    order.email = findOrder.email;
 
     switch (order.status) {
       case 'PENDING TO BE ACCEPTED':
@@ -33,6 +35,18 @@ export class ChangeOrderStatus {
     }
 
     const changeOrderStatus = await order.changeOrderStatus();
+
+    const email = new SendEmail(order.email!);
+    const sendEmail = async () => {
+      const send = await email.sendOrderChangedStatusEmail(
+        findOrder,
+        order.status!
+      );
+      console.log(send);
+      return send;
+    };
+
+    await sendEmail();
 
     return changeOrderStatus;
   }

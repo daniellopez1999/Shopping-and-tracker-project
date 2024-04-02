@@ -17,6 +17,7 @@ export class OrdersMongoose implements OrderModule.OrderRepository {
     orderData: OrderModule.Order
   ): Promise<OrderModule.Order> {
     try {
+      console.log(orderData);
       const order = await Order.create(orderData);
 
       return order as unknown as OrderModule.Order;

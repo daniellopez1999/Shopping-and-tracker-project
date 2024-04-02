@@ -17,6 +17,7 @@ export class Order implements OrderModule.Order {
     | undefined;
   public createdAt: Date | undefined;
   public updatedAt: Date | undefined;
+  public email: string | undefined;
 
   constructor(storage: OrderModule.OrderRepository) {
     this.storage = storage;
@@ -28,6 +29,7 @@ export class Order implements OrderModule.Order {
       user_id: this.user_id,
       address: this.address,
       total_price: this.total_price,
+      email: this.email,
     });
     return order;
   }

@@ -14,6 +14,7 @@ export declare namespace OrderModule {
       | 'COMPLETED';
     createdAt?: Date;
     updatedAt?: Date;
+    email?: string;
   }
 
   interface Address {
