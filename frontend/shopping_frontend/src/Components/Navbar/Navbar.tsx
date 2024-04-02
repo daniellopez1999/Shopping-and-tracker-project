@@ -30,6 +30,7 @@ export default function NavBar() {
     >
       <ButtonGroup
         size="medium"
+        color={'inherit'}
         aria-label="Large button group"
         style={{ marginRight: '15px', marginTop: '15px' }}
       >

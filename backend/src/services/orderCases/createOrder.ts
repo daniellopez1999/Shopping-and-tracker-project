@@ -2,6 +2,7 @@ import { OrderModule } from '../../infrastructure/orders/type';
 import { ProductModule } from '../../infrastructure/products/types';
 import { Order } from '../../infrastructure/orders/orderModule';
 import { Weather } from '../../infrastructure/weatherAPI/weatherModule';
+import { SendEmail } from '../../infrastructure/sendEmailAPI/sendEmailModule';
 
 export class CreateOrder {
   private readonly ordersDB: OrderModule.OrderRepository;
@@ -12,6 +13,7 @@ export class CreateOrder {
   public async exec(
     products: ProductModule.Product[],
     user_id: string,
+    user_email: string,
     address: OrderModule.Address
   ) {
     const order = new Order(this.ordersDB);
@@ -42,6 +44,16 @@ export class CreateOrder {
     order.total_price = totalPrice;
 
     const createOrder = await order.create();
+
+    const email = new SendEmail(user_email);
+    const sendEmail = async () => {
+      const send = await email.sendOrderCreationEmail(createOrder);
+      console.log(send);
+      return send;
+    };
+
+    await sendEmail();
+
     return createOrder;
   }
 }

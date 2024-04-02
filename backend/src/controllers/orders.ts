@@ -26,7 +26,7 @@ export class Orders {
 
   static async createOrder(req: Request, res: Response) {
     try {
-      const { products, user_id, address } = req.body;
+      const { products, user_id, user_email, address } = req.body;
 
       const productsDB = new ProductsMongoose();
       const ordersDB = new OrdersMongoose();
@@ -39,7 +39,12 @@ export class Orders {
       }
 
       const createOrder = new CreateOrder(ordersDB);
-      const order = await createOrder.exec(products, user_id, address);
+      const order = await createOrder.exec(
+        products,
+        user_id,
+        user_email,
+        address
+      );
 
       return res.status(200).json({ order });
     } catch (error) {
