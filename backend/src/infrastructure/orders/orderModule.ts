@@ -15,6 +15,8 @@ export class Order implements OrderModule.Order {
     | 'ON DELIVERY'
     | 'COMPLETED'
     | undefined;
+  public createdAt: Date | undefined;
+  public updatedAt: Date | undefined;
 
   constructor(storage: OrderModule.OrderRepository) {
     this.storage = storage;
