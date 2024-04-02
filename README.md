@@ -22,9 +22,11 @@ npm run dev
 
 
 ### External API
-External API: https://openweathermap.org/api This API is used to get the city weather when doing the order. If it's raining it will add a suplement of 2€ to the order.   
+https://openweathermap.org/api This API is used to get the city weather when doing the order. If it's raining it will add a suplement of 2€ to the order.   
+https://resend.com/ This API is used to send email when creating and order, and when changing the status of the order i.e: From Accepted to Delivered. (Pending to verify email, 72h needed)
 
 ### .ENV Backend File needs:
 #### PORT
 #### DB_URL
 #### WEATHER_API_KEY
+#### RESSEND_EMAIL
