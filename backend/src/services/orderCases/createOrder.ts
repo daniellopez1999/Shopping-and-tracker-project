@@ -1,6 +1,7 @@
 import { OrderModule } from '../../infrastructure/orders/type';
 import { ProductModule } from '../../infrastructure/products/types';
 import { Order } from '../../infrastructure/orders/orderModule';
+import { Weather } from '../../infrastructure/weatherAPI/weatherModule';
 
 export class CreateOrder {
   private readonly ordersDB: OrderModule.OrderRepository;
@@ -22,6 +23,21 @@ export class CreateOrder {
     order.products.forEach(
       (product) => (totalPrice += product.price! * product.quantity!)
     );
+
+    //Get Weather of the city selected
+    //First get coordinates to get weather.
+    const weather = new Weather(order.address.city);
+    const coordinates = await weather.getCoordinates();
+
+    weather.lat = coordinates.lat;
+    weather.lon = coordinates.lon;
+
+    const cityWeather = await weather.getWeather();
+
+    if (weather.possibleBadWeathers.includes(cityWeather.main)) {
+      totalPrice += 2.0;
+      totalPrice = parseFloat(totalPrice.toFixed(2));
+    }
 
     order.total_price = totalPrice;
 
