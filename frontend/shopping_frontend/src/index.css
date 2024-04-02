@@ -1,11 +1,11 @@
 body {
   padding: 0;
   margin: 0;
-  min-width: 340px;
+  width: 100vw;
   min-height: 100vh;
+  display: flex;
 }
 
 #root {
-  width: 100vw;
-  height: 100vh;
+  flex: 1;
 }
