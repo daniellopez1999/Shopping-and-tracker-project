@@ -25,13 +25,7 @@ const BasicCard: React.FC<BasicCardProps> = ({
     >
       <Card sx={{ minWidth: 345, maxWidth: 345, maxHeight: 345 }}>
         <CardActionArea>
-          <CardMedia
-            component="img"
-            height="150"
-            image={image}
-            alt={image}
-            style={{ objectFit: 'contain' }}
-          />
+          <CardMedia component="img" height="150" image={image} alt={image} />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {title}
