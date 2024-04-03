@@ -30,3 +30,5 @@ https://resend.com/ This API is used to send email when creating and order, and 
 #### DB_URL
 #### WEATHER_API_KEY
 #### RESSEND_EMAIL
+#### JWT_SECRET
+#### JWT_EXPIRES
