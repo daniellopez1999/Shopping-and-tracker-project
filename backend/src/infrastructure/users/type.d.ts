@@ -5,6 +5,7 @@ export declare namespace UsersModule {
     email?: string;
     authentication?: Authentication;
     phone_number?: number;
+    role?: string;
   }
 
   interface UserFromMongoose {
@@ -18,6 +19,7 @@ export declare namespace UsersModule {
     email: string;
     createdAt: NativeDate;
     updatedAt: NativeDate;
+    role?: string;
     __v: any;
   }
 

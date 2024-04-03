@@ -6,7 +6,7 @@ import { UserLogin } from '../services/usersCases/userLogin';
 export class Authentications {
   static async register(req: Request, res: Response) {
     try {
-      const { username, password, email, phone_number } = req.body;
+      const { username, password, email, phone_number, role } = req.body;
       const usersDB = new UsersMongoose();
 
       const userCreation = new UserRegister(usersDB);
@@ -15,7 +15,8 @@ export class Authentications {
         username,
         password,
         email,
-        phone_number
+        phone_number,
+        role
       );
       return res.status(200).json({ user });
     } catch (error) {

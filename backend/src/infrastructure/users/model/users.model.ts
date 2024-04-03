@@ -15,6 +15,11 @@ const UsersSchema = new mongoose.Schema(
       salt: { type: String, select: false },
       sessionToken: { type: String, select: false },
     },
+    role: {
+      type: String,
+      required: true,
+      enum: ['Client', 'Courier', 'Admin', 'SuperAdmin'],
+    },
   },
   { timestamps: true }
 );

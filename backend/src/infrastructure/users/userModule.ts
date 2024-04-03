@@ -12,6 +12,7 @@ export class UserClass implements UsersModule.User {
   public sessionToken: string | undefined;
   public phone_number: number | undefined;
   public salt: string | undefined;
+  public role: string | undefined;
 
   constructor(storage: UsersModule.UsersRepository) {
     this.storage = storage;
@@ -26,6 +27,7 @@ export class UserClass implements UsersModule.User {
         salt: this.salt,
       },
       phone_number: this.phone_number,
+      role: this.role,
     });
     return user as unknown as UsersModule.User;
   }
