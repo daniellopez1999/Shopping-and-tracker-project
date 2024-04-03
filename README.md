@@ -9,16 +9,12 @@ Database: MongoDB with Mongoose as ODM
 
 ### Pending
 Pending frontend: Most of the frontend   
-Pending backend: Auth and user roles/permissions   
-superadmin | admin | customer | courier
-
 
 ### Installation
 #### Run the following commands after cloning the repository:
 cd backend   
 npm i   
 npm run dev
-
 
 
 ### External API
