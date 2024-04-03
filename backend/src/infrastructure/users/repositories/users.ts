@@ -10,7 +10,6 @@ export class UsersMongoose implements UsersModule.UsersRepository {
 
     if (!user)
       return { Error: 'User does not exist' } as unknown as UsersModule.Error;
-
     return user as unknown as UsersModule.UserFromMongoose;
   }
   public async getUserByUsernameLogin(
