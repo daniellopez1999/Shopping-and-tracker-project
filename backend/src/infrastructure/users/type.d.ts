@@ -6,6 +6,7 @@ export declare namespace UsersModule {
     authentication?: Authentication;
     phone_number?: number;
     role?: string;
+    __v?: string;
   }
 
   interface UserFromMongoose {

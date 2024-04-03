@@ -18,8 +18,10 @@ export class UserRegister {
   ) {
     const salt = random();
     const user = new UserClass(this.usersDB);
+
     if (role) user.role = role;
     else user.role = 'Client';
+
     user.email = email;
     user.username = username;
     user.password = authentication(salt, password);
