@@ -205,7 +205,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"products\": [\r\n    {\r\n      \"_id\": \"6609adb93c0a7a6608de1658\",\r\n      \"name\": \"Tortilla Francesa\",\r\n      \"description\": \"Tortilla francesa\",\r\n      \"price\": 2.99,\r\n      \"quantity\": 10,\r\n      \"type\": \"Food\",\r\n      \"__v\": 0\r\n    },\r\n    {\r\n      \"_id\": \"6609add43c0a7a6608de165b\",\r\n      \"name\": \"Lays Jamon\",\r\n      \"description\": \"Patatas de bolsa sabor jamon\",\r\n      \"price\": 1.6,\r\n      \"quantity\": 5,\r\n      \"type\": \"Snack\",\r\n      \"__v\": 0\r\n    }\r\n  ],\r\n  \"user_id\": \"9d1j09d1209ej\",\r\n  \"address\": {\r\n    \"country\": \"Spain\",\r\n    \"city\": \"Montgat\",\r\n    \"zip_code\": \"08390\"\r\n  }\r\n}\r\n",
+							"raw": "{\r\n  \"products\": [\r\n        {\r\n            \"_id\": \"6609a8a99957dbc7f209eb37\",\r\n            \"name\": \"Monster curandero\",\r\n            \"description\": \"Bebida energetica con azucar\",\r\n            \"price\": 1.89,\r\n            \"quantity\": 1,\r\n            \"type\": \"Drink\",\r\n            \"__v\": 0\r\n        }\r\n  ],\r\n  \"user_id\": \"9d1j09d1209ej\",\r\n  \"user_email\": \"lopezbogazdaniel@gmail.com\",\r\n  \"address\": {\r\n    \"country\": \"Spain\",\r\n    \"city\": \"Barcelona\",\r\n    \"zip_code\": \"08390\"\r\n  }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -241,7 +241,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"660b030eb7d0445cdc8de017\"\r\n}",
+							"raw": "{\r\n    \"id\": \"660c899bf38139c7ea212123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -259,6 +259,143 @@
 								"api",
 								"orders",
 								"change-status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"1\",\r\n    \"password\": \"2pedrosa2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"danilopez9912\",\r\n    \"password\": \"2pedrosa2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/delete/660d5c73b76c3a3e1d3fe86d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"delete",
+								"660d5c73b76c3a3e1d3fe86d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"2\",\r\n    \"password\": \"2pedrosa2\",\r\n    \"email\": \"lopezbogazdanie1ll@gmail.com\",\r\n    \"phone_number\": 622714140,\r\n    \"role\": \"Admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findUserByUsername",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api//users/find-by-username/danielopez1999",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"",
+								"users",
+								"find-by-username",
+								"danielopez1999"
 							]
 						}
 					},
