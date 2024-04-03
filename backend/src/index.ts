@@ -1,10 +1,25 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import apiRouter from './router';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import compression from 'compression';
+import bodyParser from 'body-parser';
 
 dotenv.config();
 
 const app = express();
+
+app.use(
+  cors({
+    credentials: true,
+    methods: ['GET', 'POST', 'PATCH'],
+    origin: ['http://localhost:5173'],
+  })
+);
+app.use(cookieParser());
+app.use(compression());
+app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3000;
 
