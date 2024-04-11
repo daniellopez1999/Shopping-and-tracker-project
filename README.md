@@ -28,3 +28,11 @@ https://resend.com/ This API is used to send email when creating and order, and 
 #### RESSEND_EMAIL
 #### JWT_SECRET
 #### JWT_EXPIRES
+
+### .ENV Backend Example:
+#### PORT: '8080'
+#### DB_URL: 'mongodb://localhost:27017/shopping-project'
+#### WEATHER_API_KEY: //Get your key at https://openweathermap.org/api
+#### RESSEND_EMAIL: //Get your key at https://resend.com/
+#### JWT_SECRET: //Generate your JWT_SECRET with the following code example: console.log(require('crypto').randomBytes(32).toString('hex'))
+#### JWT_EXPIRES: '1d'
