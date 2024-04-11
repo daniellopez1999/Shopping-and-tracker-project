@@ -33,7 +33,13 @@ const OrderSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['PENDING TO BE ACCEPTED', 'ACCEPTED', 'ON DELIVERY', 'COMPLETED'],
+      enum: [
+        'PENDING TO BE ACCEPTED',
+        'ACCEPTED',
+        'ON DELIVERY',
+        'DELIVERED',
+        'COMPLETED',
+      ],
       default: 'PENDING TO BE ACCEPTED',
       required: true,
     },

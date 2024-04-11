@@ -13,6 +13,7 @@ export class Order implements OrderModule.Order {
     | 'PENDING TO BE ACCEPTED'
     | 'ACCEPTED'
     | 'ON DELIVERY'
+    | 'DELIVERED'
     | 'COMPLETED'
     | undefined;
   public createdAt: Date | undefined;
@@ -39,7 +40,9 @@ export class Order implements OrderModule.Order {
     return order;
   }
 
-  public async changeOrderStatus(): Promise<OrderModule.Order> {
+  public async changeOrderStatus(): Promise<
+    OrderModule.Order | OrderModule.Error
+  > {
     const order = await this.storage.changeOrderStatus({
       _id: this._id,
       products: this.products,

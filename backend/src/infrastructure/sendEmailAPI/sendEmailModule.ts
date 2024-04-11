@@ -9,9 +9,9 @@ export class SendEmail {
   }
 
   public async sendOrderCreationEmail(orderData: OrderModule.Order) {
-    const resend = new Resend('re_dKSL8rRQ_Prv7pPo3e7uUbjRXuaU685ao');
+    const resend = new Resend(process.env.RESSEND_EMAIL);
     return resend.emails.send({
-      from: 'lopezbogazdaniel@shopping-tracking-project.com',
+      from: 'Acme <onboarding@resend.dev>',
       to: `${this.email}`,
       subject: `Order: ${orderData._id}`,
       html: `<div>
@@ -26,9 +26,9 @@ export class SendEmail {
     orderData: OrderModule.Order,
     status: string
   ) {
-    const resend = new Resend('re_dKSL8rRQ_Prv7pPo3e7uUbjRXuaU685ao');
+    const resend = new Resend(process.env.RESSEND_EMAIL);
     return resend.emails.send({
-      from: 'lopezbogazdaniel@shopping-tracking-project.com',
+      from: 'Acme <onboarding@resend.dev>',
       to: `${this.email}`,
       subject: `Order ${orderData._id} has a new status`,
       html: `<div>

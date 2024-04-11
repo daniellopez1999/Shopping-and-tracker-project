@@ -7,6 +7,7 @@ export declare namespace UsersModule {
     phone_number?: number;
     role?: string;
     __v?: string;
+    orders?: string[];
   }
 
   interface UserFromMongoose {
@@ -22,6 +23,7 @@ export declare namespace UsersModule {
     updatedAt: NativeDate;
     role?: string;
     __v: any;
+    orders: string[];
   }
 
   interface Authentication {
@@ -51,6 +53,10 @@ export declare namespace UsersModule {
     ): Promise<UsersModule.User>;
     public getUserByUsername(
       username: string
+    ): Promise<UsersModule.UserFromMongoose | UsersModule.Error>;
+    public addOrderToUser(
+      user_id: string,
+      order_id: string
     ): Promise<UsersModule.UserFromMongoose | UsersModule.Error>;
   }
 }

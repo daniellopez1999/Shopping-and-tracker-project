@@ -29,25 +29,32 @@ export class ChangeOrderStatus {
         order.status = 'ON DELIVERY';
         break;
       case 'ON DELIVERY':
+        order.status = 'DELIVERED';
+        break;
+      case 'DELIVERED':
         order.status = 'COMPLETED';
         break;
+
       default:
     }
 
     const changeOrderStatus = await order.changeOrderStatus();
 
-    const email = new SendEmail(order.email!);
-    const sendEmail = async () => {
-      const send = await email.sendOrderChangedStatusEmail(
-        findOrder,
-        order.status!
-      );
-      console.log(send);
-      return send;
-    };
+    if ('Error' in changeOrderStatus)
+      return { Error: 'Status is already completed' };
+    else {
+      const email = new SendEmail(order.email!);
+      const sendEmail = async () => {
+        const send = await email.sendOrderChangedStatusEmail(
+          findOrder,
+          order.status!
+        );
+        return send;
+      };
 
-    await sendEmail();
+      await sendEmail();
 
-    return changeOrderStatus;
+      return changeOrderStatus;
+    }
   }
 }

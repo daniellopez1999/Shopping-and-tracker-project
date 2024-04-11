@@ -17,7 +17,6 @@ export class OrdersMongoose implements OrderModule.OrderRepository {
     orderData: OrderModule.Order
   ): Promise<OrderModule.Order> {
     try {
-      console.log(orderData);
       const order = await Order.create(orderData);
 
       return order as unknown as OrderModule.Order;
@@ -29,9 +28,13 @@ export class OrdersMongoose implements OrderModule.OrderRepository {
 
   public async changeOrderStatus(
     order: OrderModule.Order
-  ): Promise<OrderModule.Order> {
+  ): Promise<OrderModule.Order | OrderModule.Error> {
     try {
       const orderWithOldStatus = await Order.findById(order._id);
+
+      if (order.status === 'COMPLETED') {
+        return { Error: 'Status is already completed' };
+      }
 
       if (order.status) orderWithOldStatus!.status = order.status;
 

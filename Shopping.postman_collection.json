@@ -156,7 +156,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/orders/9292929",
+							"raw": "http://localhost:8080/api/orders/661826945cf64856b290d233",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -165,7 +165,7 @@
 							"path": [
 								"api",
 								"orders",
-								"9292929"
+								"661826945cf64856b290d233"
 							]
 						}
 					},
@@ -205,7 +205,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"products\": [\r\n        {\r\n            \"_id\": \"6609a8a99957dbc7f209eb37\",\r\n            \"name\": \"Monster curandero\",\r\n            \"description\": \"Bebida energetica con azucar\",\r\n            \"price\": 1.89,\r\n            \"quantity\": 1,\r\n            \"type\": \"Drink\",\r\n            \"__v\": 0\r\n        }\r\n  ],\r\n  \"user_id\": \"9d1j09d1209ej\",\r\n  \"user_email\": \"lopezbogazdaniel@gmail.com\",\r\n  \"address\": {\r\n    \"country\": \"Spain\",\r\n    \"city\": \"Barcelona\",\r\n    \"zip_code\": \"08390\"\r\n  }\r\n}\r\n",
+							"raw": "{\r\n  \"products\": [\r\n        {\r\n            \"_id\": \"6609a8a99957dbc7f209eb37\",\r\n            \"name\": \"Monster curandero\",\r\n            \"description\": \"Bebida energetica con azucar\",\r\n            \"price\": 1.89,\r\n            \"quantity\": 1,\r\n            \"type\": \"Drink\",\r\n            \"__v\": 0\r\n        }\r\n  ],\r\n  \"user_id\": \"660d9cdb6b8847a4874f6137\",\r\n  \"user_email\": \"lopezbogazdaniel@gmail.com\",\r\n  \"address\": {\r\n    \"country\": \"Spain\",\r\n    \"city\": \"Barcelona\",\r\n    \"zip_code\": \"08390\"\r\n  }\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -241,7 +241,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"660c899bf38139c7ea212123\"\r\n}",
+							"raw": "{\r\n    \"id\": \"661826f2e2f8bcb6c7af861f\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -282,7 +282,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"1\",\r\n    \"password\": \"2pedrosa2\"\r\n}",
+							"raw": "{\r\n    \"username\": \"2\",\r\n    \"password\": \"2pedrosa2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -384,7 +384,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api//users/find-by-username/danielopez1999",
+							"raw": "http://localhost:8080/api//users/find-by-username/danilopez99",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -395,7 +395,7 @@
 								"",
 								"users",
 								"find-by-username",
-								"danielopez1999"
+								"danilopez99"
 							]
 						}
 					},

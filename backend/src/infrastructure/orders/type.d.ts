@@ -11,6 +11,7 @@ export declare namespace OrderModule {
       | 'PENDING TO BE ACCEPTED'
       | 'ACCEPTED'
       | 'ON DELIVERY'
+      | 'DELIVERED'
       | 'COMPLETED';
     createdAt?: Date;
     updatedAt?: Date;
@@ -23,6 +24,10 @@ export declare namespace OrderModule {
     zip_zode: string;
   }
 
+  interface Error {
+    Error: string;
+  }
+
   interface OrderRepository {
     public findByID(id: string): Promise<OrderModule.Order>;
     public createOrder(
@@ -30,7 +35,7 @@ export declare namespace OrderModule {
     ): Promise<OrderModule.Order>;
     public changeOrderStatus(
       order: OrderModule.Order
-    ): Promise<OrderModule.Order>;
+    ): Promise<OrderModule.Order | OrderModule.Error>;
     public findUnassignedOrders(): Promise<OrderModule.Order[]>;
   }
 }

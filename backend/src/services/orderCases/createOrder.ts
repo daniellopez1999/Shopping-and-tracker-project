@@ -1,13 +1,22 @@
 import { OrderModule } from '../../infrastructure/orders/type';
 import { ProductModule } from '../../infrastructure/products/types';
+import { UsersModule } from '../../infrastructure/users/type';
+
 import { Order } from '../../infrastructure/orders/orderModule';
 import { Weather } from '../../infrastructure/weatherAPI/weatherModule';
 import { SendEmail } from '../../infrastructure/sendEmailAPI/sendEmailModule';
+import { UserClass } from '../../infrastructure/users/userModule';
 
 export class CreateOrder {
   private readonly ordersDB: OrderModule.OrderRepository;
-  constructor(ordersDB: OrderModule.OrderRepository) {
+  private readonly usersDB: UsersModule.UsersRepository;
+
+  constructor(
+    ordersDB: OrderModule.OrderRepository,
+    usersDB: UsersModule.UsersRepository
+  ) {
     this.ordersDB = ordersDB;
+    this.usersDB = usersDB;
   }
 
   public async exec(
@@ -16,6 +25,9 @@ export class CreateOrder {
     user_email: string,
     address: OrderModule.Address
   ) {
+    const user = new UserClass(this.usersDB);
+    user.id = user_id;
+
     const order = new Order(this.ordersDB);
     order.products = products;
     order.user_id = user_id;
@@ -46,10 +58,17 @@ export class CreateOrder {
 
     const createOrder = await order.create();
 
+    user.order_id = createOrder._id;
+
+    const addOrderToUser = async () => {
+      await user.addOrderToUser();
+    };
+
+    addOrderToUser();
+
     const email = new SendEmail(user_email);
     const sendEmail = async () => {
       const send = await email.sendOrderCreationEmail(createOrder);
-      console.log(send);
       return send;
     };
 

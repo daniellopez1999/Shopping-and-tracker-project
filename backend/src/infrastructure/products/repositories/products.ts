@@ -110,7 +110,6 @@ export class ProductsMongoose implements ProductModule.ProductsRepository {
     listOfProducts: ProductModule.ListOfProducts[]
   ): Promise<ProductModule.Product[]> {
     try {
-      console.log(listOfProducts);
       const productIds = listOfProducts.map((product) => product._id);
 
       const products = await Product.find({ _id: { $in: productIds } });

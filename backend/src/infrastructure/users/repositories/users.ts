@@ -90,4 +90,22 @@ export class UsersMongoose implements UsersModule.UsersRepository {
     const user = await User.findByIdAndUpdate(id, values);
     return user as unknown as UsersModule.User;
   }
+  public async addOrderToUser(
+    user_id: string,
+    order_id: string
+  ): Promise<UsersModule.UserFromMongoose | UsersModule.Error> {
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: user_id },
+        { $push: { orders: order_id } },
+        { new: true }
+      );
+
+      if (!user) return { Error: 'User not found' };
+
+      return user as unknown as UsersModule.UserFromMongoose;
+    } catch (error) {
+      return { Error: `${error}` };
+    }
+  }
 }

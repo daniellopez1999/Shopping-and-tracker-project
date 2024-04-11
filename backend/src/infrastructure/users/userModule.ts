@@ -13,6 +13,7 @@ export class UserClass implements UsersModule.User {
   public phone_number: number | undefined;
   public salt: string | undefined;
   public role: string | undefined;
+  public order_id: string | undefined;
 
   constructor(storage: UsersModule.UsersRepository) {
     this.storage = storage;
@@ -70,6 +71,13 @@ export class UserClass implements UsersModule.User {
       email: this.email,
       password: this.password,
     });
+    return user;
+  }
+
+  public async addOrderToUser(): Promise<
+    UsersModule.UserFromMongoose | UsersModule.Error
+  > {
+    const user = await this.storage.addOrderToUser(this.id!, this.order_id!);
     return user;
   }
 }

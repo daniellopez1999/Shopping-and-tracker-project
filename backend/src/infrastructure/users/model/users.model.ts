@@ -20,6 +20,9 @@ const UsersSchema = new mongoose.Schema(
       required: true,
       enum: ['Client', 'Courier', 'Admin', 'SuperAdmin'],
     },
+    orders: {
+      type: [String],
+    },
   },
   { timestamps: true }
 );

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { OrdersMongoose } from '../infrastructure/orders/repositories/orders';
+import { UsersMongoose } from '../infrastructure/users/repositories/users';
 import { ProductsMongoose } from '../infrastructure/products/repositories/products';
 import { CreateOrder } from '../services/orderCases/createOrder';
 import { BuyProducts } from '../services/productCases/buyProducts';
@@ -29,6 +30,7 @@ export class Orders {
       const { products, user_id, user_email, address } = req.body;
 
       const productsDB = new ProductsMongoose();
+      const usersDB = new UsersMongoose();
       const ordersDB = new OrdersMongoose();
 
       const buyProductsBeforeOrder = new BuyProducts(productsDB);
@@ -38,7 +40,7 @@ export class Orders {
         return res.status(400).json({ error: productsList });
       }
 
-      const createOrder = new CreateOrder(ordersDB);
+      const createOrder = new CreateOrder(ordersDB, usersDB);
       const order = await createOrder.exec(
         products,
         user_id,
