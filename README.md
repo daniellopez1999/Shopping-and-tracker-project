@@ -30,9 +30,19 @@ https://resend.com/ This API is used to send email when creating and order, and 
 #### JWT_EXPIRES
 
 ### .ENV Backend Example:
-#### PORT: '8080'
-#### DB_URL: 'mongodb://localhost:27017/shopping-project'
+#### PORT: '4000'
+#### DB_URL: 'mongodb://mongodb/shopping-project'
 #### WEATHER_API_KEY: //Get your key at https://openweathermap.org/api
 #### RESSEND_EMAIL: //Get your key at https://resend.com/
 #### JWT_SECRET: //Generate your JWT_SECRET with the following code example: console.log(require('crypto').randomBytes(32).toString('hex'))
 #### JWT_EXPIRES: '1d'
+   
+### Docker Installation
+#### Run the following commands after cloning the repository and making sure Docker is installed in your computer:
+docker-compose build     
+docker-compose up   
+The above command will run App and MongoDB, wait some seconds until App is Running please.
+
+### Docker Configuration
+If you use the above .ENV configuration, you should not change the docker-compose.yml configuration file, but if you want to, make sure the ports from docker-compose.yml are the same from the .env
+
