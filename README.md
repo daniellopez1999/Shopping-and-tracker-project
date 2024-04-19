@@ -45,4 +45,5 @@ The above command will run App and MongoDB, wait some seconds until App is Runni
 
 ### Docker Configuration
 If you use the above .ENV configuration, you should not change the docker-compose.yml configuration file, but if you want to, make sure the ports from docker-compose.yml are the same from the .env
+If you change the app service port, make sure to change it also in Postman.
 
