@@ -15,12 +15,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/products/66046d2aad2944ed70bea16d",
+							"raw": "http://localhost:4000/api/products/66046d2aad2944ed70bea16d",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "4000",
 							"path": [
 								"api",
 								"products",
@@ -36,12 +36,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/products/products-type/Snack",
+							"raw": "http://localhost:4000/api/products/products-type/Snack",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "4000",
 							"path": [
 								"api",
 								"products",
@@ -58,12 +58,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/products/all",
+							"raw": "http://localhost:4000/api/products/all",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "4000",
 							"path": [
 								"api",
 								"products",
@@ -86,7 +86,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Lays Jamon\",\r\n    \"description\": \"Patatas de bolsa sabor jamon\",\r\n    \"price\": 1.60,\r\n    \"quantity\": 30,\r\n    \"type\": \"Snack\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Lays Purpurina\",\r\n    \"description\": \"Patatas de bolsa sabor purpurina\",\r\n    \"price\": 1.60,\r\n    \"quantity\": 30,\r\n    \"type\": \"Snack\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -94,12 +94,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/products/create-product",
+							"raw": "http://localhost:4000/api/products/create-product",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "4000",
 							"path": [
 								"api",
 								"products",
@@ -130,12 +130,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/products/buy",
+							"raw": "http://localhost:4000/api/products/buy",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "4000",
 							"path": [
 								"api",
 								"products",
@@ -156,12 +156,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/orders/661826945cf64856b290d233",
+							"raw": "http://localhost:4000/api/orders/661826945cf64856b290d233",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "4000",
 							"path": [
 								"api",
 								"orders",
@@ -177,12 +177,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/orders/unassigned-orders",
+							"raw": "http://localhost:4000/api/orders/unassigned-orders",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "4000",
 							"path": [
 								"api",
 								"orders",
@@ -213,12 +213,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/orders/create-order",
+							"raw": "http://localhost:4000/api/orders/create-order",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "4000",
 							"path": [
 								"api",
 								"orders",
@@ -249,12 +249,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/orders/change-status",
+							"raw": "http://localhost:4000/api/orders/change-status",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "4000",
 							"path": [
 								"api",
 								"orders",
@@ -290,12 +290,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/auth/login",
+							"raw": "http://localhost:5000/api/auth/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "5000",
 							"path": [
 								"api",
 								"auth",
@@ -326,12 +326,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/users/delete/660d5c73b76c3a3e1d3fe86d",
+							"raw": "http://localhost:4000/api/users/delete/660d5c73b76c3a3e1d3fe86d",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "4000",
 							"path": [
 								"api",
 								"users",
@@ -363,12 +363,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/auth/register",
+							"raw": "http://localhost:4000/api/auth/register",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "4000",
 							"path": [
 								"api",
 								"auth",
@@ -384,18 +384,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api//users/find-by-username/danilopez99",
+							"raw": "http://localhost:4000/api/users/find-by-username/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "4000",
 							"path": [
 								"api",
-								"",
 								"users",
 								"find-by-username",
-								"danilopez99"
+								"2"
 							]
 						}
 					},
