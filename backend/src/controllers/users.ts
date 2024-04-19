@@ -7,7 +7,8 @@ import { DeleteUserByID } from '../services/usersCases/deleteUserById';
 export class UsersController {
   static async findUser(req: Request, res: Response) {
     try {
-      const { username } = req.body;
+      const { username } = req.params;
+
       const usersDB = new UsersMongoose();
 
       const userSearch = new FindUserByUsername(usersDB);

@@ -14,14 +14,14 @@ app.use(
   cors({
     credentials: true,
     methods: ['GET', 'POST', 'PATCH'],
-    origin: ['http://localhost:5173'],
+    origin: ['http://localhost:5173', 'http://localhost:4000'],
   })
 );
 app.use(cookieParser());
 app.use(compression());
 app.use(bodyParser.json());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3500;
 
 app.use(express.json());
 app.use('/api', apiRouter);
