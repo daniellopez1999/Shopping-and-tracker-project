@@ -9,6 +9,7 @@ export class ProductClass implements ProductModule.Product {
   public price: number | undefined;
   public quantity: number | undefined;
   public type: string | undefined;
+  public image: string | undefined;
   public listOfProducts: ProductModule.ListOfProducts[] | undefined;
   public listOfProductsToUpdate: ProductModule.Product[] | undefined;
 
@@ -22,6 +23,7 @@ export class ProductClass implements ProductModule.Product {
       description: this.description,
       price: this.price,
       quantity: this.quantity,
+      image: this.image,
       type: this.type,
     });
     return product;

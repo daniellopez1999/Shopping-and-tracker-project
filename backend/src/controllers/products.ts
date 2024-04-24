@@ -30,7 +30,7 @@ export class Products {
 
       const products = await allProducts.exec();
 
-      return res.status(200).json({ products });
+      return res.status(200).json(products);
     } catch (error) {
       console.log(error);
       return res.status(400).json({ Error: error });
@@ -62,7 +62,7 @@ export class Products {
 
       const product = await buyProduct.exec(productsToBuy);
 
-      return res.status(200).json({ product });
+      return res.status(200).json(product);
     } catch (error) {
       console.log(error);
       return res.status(400).json({ Error: error });
@@ -78,7 +78,7 @@ export class Products {
 
       const products = await findProducts.exec(type);
 
-      return res.status(200).json({ products });
+      return res.status(200).json(products);
     } catch (error) {
       console.log(error);
       return res.status(400).json({ Error: error });

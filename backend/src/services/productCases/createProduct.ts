@@ -13,6 +13,7 @@ export class CreateProduct {
     product.price = productSettings.price;
     product.quantity = productSettings.quantity;
     product.type = productSettings.type;
+    product.image = productSettings.image;
 
     const productSave = await product.saveProduct();
 

@@ -8,6 +8,7 @@ export class ProductsMongoose implements ProductModule.ProductsRepository {
     price,
     quantity,
     type,
+    image,
   }: Partial<ProductModule.Product>): Promise<ProductModule.Product | null> {
     try {
       const newProduct = {
@@ -16,6 +17,7 @@ export class ProductsMongoose implements ProductModule.ProductsRepository {
         price,
         quantity,
         type,
+        image,
       };
 
       const product = await Product.findOne({ name });
