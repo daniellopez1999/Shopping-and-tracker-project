@@ -5,6 +5,7 @@ import { FindProduct } from '../services/productCases/getProductById';
 import { GetAllProduicts } from '../services/productCases/getAllProducts';
 import { BuyProducts } from '../services/productCases/buyProducts';
 import { GetProductsByType } from '../services/productCases/getProductsByType';
+import { CreateProductsTemplate } from '../services/productCases/createProductsTemplate';
 
 export class Products {
   static async getById(req: Request, res: Response) {
@@ -61,6 +62,20 @@ export class Products {
       const buyProduct = new BuyProducts(productsDB);
 
       const product = await buyProduct.exec(productsToBuy);
+
+      return res.status(200).json(product);
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ Error: error });
+    }
+  }
+
+  static async createProductsTemplate(_req: Request, res: Response) {
+    try {
+      const productsDB = new ProductsMongoose();
+      const createProductsTemplate = new CreateProductsTemplate(productsDB);
+
+      const product = await createProductsTemplate.exec();
 
       return res.status(200).json(product);
     } catch (error) {

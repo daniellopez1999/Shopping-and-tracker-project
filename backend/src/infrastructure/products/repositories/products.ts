@@ -1,7 +1,19 @@
 import Product from '../model/products.model';
 import { ProductModule } from '../types';
+import { productList } from './productsMock';
 
 export class ProductsMongoose implements ProductModule.ProductsRepository {
+  public async createProductsTemplate(): Promise<
+    ProductModule.Product[] | null
+  > {
+    try {
+      const products = await Product.insertMany(productList);
+      return products;
+    } catch (error) {
+      //@ts-ignore
+      return { Error: error };
+    }
+  }
   public async save({
     name,
     description,

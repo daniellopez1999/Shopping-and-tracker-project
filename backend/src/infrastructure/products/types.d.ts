@@ -22,6 +22,7 @@ export declare namespace ProductModule {
   }
 
   interface ProductsRepository {
+    public createProductsTemplate(): Promise<ProductModule.Product[] | null>;
     public save(
       input: Partial<ProductModule.Product>
     ): Promise<ProductModule.Product | null>;
