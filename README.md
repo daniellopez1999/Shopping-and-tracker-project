@@ -64,8 +64,8 @@ If you change the app service port, make sure to change it also in Postman.
 
 #### JWT_EXPIRES: '1d'
 
-
-
+   
+   
 #### To Create 10 default products use the following endpoint:   
 http://localhost:4000/api/products/create-products-template   
 The API Call is in the Postman Collection -> Products -> Template Create Products
