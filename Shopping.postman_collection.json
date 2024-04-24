@@ -86,7 +86,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Lays Purpurina\",\r\n    \"description\": \"Patatas de bolsa sabor purpurina\",\r\n    \"price\": 1.60,\r\n    \"quantity\": 30,\r\n    \"type\": \"Snack\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Monsterr Verde\",\r\n    \"description\": \"Monster verde azucarado\",\r\n    \"price\": 1.89,\r\n    \"quantity\": 50,\r\n    \"image\": \"https://purepng.com/public/uploads/large/purepng.com-lays-potato-chips-packfood-potato-tasty-pack-lays-chips-taste-product-snaks-941524625368gdogh.png\",\r\n    \"type\": \"Drink\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -104,6 +104,42 @@
 								"api",
 								"products",
 								"create-product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Template Create Products",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/products/create-products-template",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"products",
+								"create-products-template"
 							]
 						}
 					},
