@@ -7,9 +7,9 @@ export class GetProductsByType {
     this.productsDB = productsDB;
   }
 
-  public async exec(type: string) {
+  public async exec(types: string[]) {
     const products = new ProductClass(this.productsDB);
-    products.type = type;
+    products.types = types;
 
     const findProducts = await products.findProductsByType();
 

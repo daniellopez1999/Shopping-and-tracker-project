@@ -87,14 +87,16 @@ export class Products {
 
   static async findProductsByType(req: Request, res: Response) {
     try {
-      const { type } = req.params;
+      const { types } = req.query;
 
-      const productsDB = new ProductsMongoose();
-      const findProducts = new GetProductsByType(productsDB);
+      if (typeof types === 'string') {
+        const typesArray = JSON.parse(decodeURIComponent(types));
+        const productsDB = new ProductsMongoose();
+        const findProducts = new GetProductsByType(productsDB);
 
-      const products = await findProducts.exec(type);
-
-      return res.status(200).json(products);
+        const products = await findProducts.exec(typesArray);
+        return res.status(200).json(products);
+      }
     } catch (error) {
       console.log(error);
       return res.status(400).json({ Error: error });

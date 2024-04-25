@@ -172,10 +172,10 @@ export class ProductsMongoose implements ProductModule.ProductsRepository {
   }
 
   public async findProductsByType(
-    type: string
+    types: string[]
   ): Promise<ProductModule.Product[]> {
     try {
-      const products = await Product.find({ type: type });
+      const products = await Product.find({ type: { $in: types } });
 
       return products;
     } catch (error) {

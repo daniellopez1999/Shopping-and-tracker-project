@@ -37,6 +37,6 @@ export declare namespace ProductModule {
       listOfProducts: ProductModule.Product[] | undefined
     ): Promise<ProductModule.Product[]>;
 
-    public findProductsByType(type: string): Promise<ProductModule.Product[]>;
+    public findProductsByType(type: string[]): Promise<ProductModule.Product[]>;
   }
 }

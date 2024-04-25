@@ -9,6 +9,7 @@ export class ProductClass implements ProductModule.Product {
   public price: number | undefined;
   public quantity: number | undefined;
   public type: string | undefined;
+  public types: string[] | undefined;
   public image: string | undefined;
   public listOfProducts: ProductModule.ListOfProducts[] | undefined;
   public listOfProductsToUpdate: ProductModule.Product[] | undefined;
@@ -56,7 +57,7 @@ export class ProductClass implements ProductModule.Product {
   }
 
   public async findProductsByType() {
-    const products = await this.storage.findProductsByType(this.type!);
+    const products = await this.storage.findProductsByType(this.types!);
     return products;
   }
 
