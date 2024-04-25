@@ -91,6 +91,7 @@ export class Products {
 
       if (typeof types === 'string') {
         const typesArray = JSON.parse(decodeURIComponent(types));
+
         const productsDB = new ProductsMongoose();
         const findProducts = new GetProductsByType(productsDB);
 
