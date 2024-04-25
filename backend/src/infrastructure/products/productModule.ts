@@ -64,4 +64,9 @@ export class ProductClass implements ProductModule.Product {
     const products = await this.storage.createProductsTemplate();
     return products;
   }
+
+  public async findAllProductTypes() {
+    const types = await this.storage.findAllProductTypes();
+    return types;
+  }
 }

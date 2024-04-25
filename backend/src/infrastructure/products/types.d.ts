@@ -28,7 +28,7 @@ export declare namespace ProductModule {
     ): Promise<ProductModule.Product | null>;
     public findById(id: string): Promise<ProductModule.Product | null>;
     public getAllProducts(): Promise<ProductModule.Product[]>;
-
+    public findAllProductTypes(): Promise<string[] | null>;
     public findProductsToBuy(
       listOfProducts: ListOfProducts[]
     ): Promise<ProductModule.Product[]>;

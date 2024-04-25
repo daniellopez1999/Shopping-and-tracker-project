@@ -6,6 +6,7 @@ const productsRouter = express.Router();
 
 productsRouter.get('/all', Products.getAllProducts);
 productsRouter.get('/products-type/:type', Products.findProductsByType);
+productsRouter.get('/all-products-type', Products.findAllProductTypes);
 productsRouter.get('/:id', Products.getById);
 productsRouter.post('/create-product', isAuthenticated, Products.createProduct);
 productsRouter.patch('/buy', isAuthenticated, Products.buyProducts);
