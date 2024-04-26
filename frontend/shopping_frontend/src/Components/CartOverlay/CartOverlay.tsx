@@ -2,7 +2,7 @@ import { Product } from '../../types/types';
 import './cart-overlay.css';
 
 interface SelectedProductProps {
-  cart: { product: Product; quantity: number }[];
+  cart: Product[];
   isCartOpen: boolean;
   setIsCartOpen: any;
 }
@@ -22,9 +22,9 @@ const CartOverlay: React.FC<SelectedProductProps> = ({
       <div className="cart-overlay">
         {cart.map((product, index) => (
           <div key={index} className="cart-selected-product">
-            <h3>{product.product.name}</h3>
-            <img src={product.product.image}></img>
-            <h3>{product.product.price} per unit</h3>
+            <h3>{product.name}</h3>
+            <img src={product.image}></img>
+            <h3>{product.price} per unit</h3>
             <h4>{product.quantity}</h4>
           </div>
         ))}

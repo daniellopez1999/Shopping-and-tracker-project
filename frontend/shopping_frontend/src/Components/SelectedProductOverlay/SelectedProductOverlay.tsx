@@ -5,7 +5,7 @@ import './selected-product-overlay.css';
 interface SelectedProductProps {
   selectedProduct: Product | null;
   setSelectedProduct: any;
-  cart: { product: Product; quantity: number }[];
+  cart: Product[];
   setCart: any;
 }
 
@@ -37,13 +37,14 @@ const SelectedProductOverlay: React.FC<SelectedProductProps> = ({
   const handleAddProduct = () => {
     const updatedCart = [...cart];
     const existingItemIndex = updatedCart.findIndex(
-      (item) => item.product._id === selectedProduct!._id
+      (item) => item._id === selectedProduct!._id
     );
 
     if (existingItemIndex !== -1) {
       updatedCart[existingItemIndex].quantity += quantity;
     } else {
-      updatedCart.push({ product: selectedProduct!, quantity });
+      const product = { ...selectedProduct!, quantity: quantity };
+      updatedCart.push(product);
     }
     setCart(updatedCart);
   };

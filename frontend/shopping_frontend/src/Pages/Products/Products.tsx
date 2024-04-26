@@ -18,9 +18,7 @@ const Products = () => {
   const [types, setTypes] = useState<string[]>([]);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [cart, setCart] = useState<{ product: Product; quantity: number }[]>(
-    []
-  );
+  const [cart, setCart] = useState<Product[]>([]);
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -79,6 +77,10 @@ const Products = () => {
   const handleSelectedProduct = () => {
     setSelectedProduct(null);
   };
+
+  useEffect(() => {
+    console.log(cart);
+  }, [cart]);
 
   if (loading) return <p>Loading products...</p>;
   if (!loading && products.length === 0) return <p>No products found</p>;
