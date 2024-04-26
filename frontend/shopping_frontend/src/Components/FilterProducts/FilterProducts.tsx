@@ -5,12 +5,20 @@ import Checkbox from '@mui/material/Checkbox';
 interface ProductsTypeProps {
   type: string;
   checked: boolean;
+  disabled: boolean;
 }
 
-const CheckboxType: React.FC<ProductsTypeProps> = ({ type, checked }) => {
+const CheckboxType: React.FC<ProductsTypeProps> = ({
+  type,
+  checked,
+  disabled,
+}) => {
   return (
     <FormGroup>
-      <FormControlLabel control={<Checkbox checked={checked} />} label={type} />
+      <FormControlLabel
+        control={<Checkbox checked={checked} disabled={disabled} />}
+        label={type}
+      />
     </FormGroup>
   );
 };
