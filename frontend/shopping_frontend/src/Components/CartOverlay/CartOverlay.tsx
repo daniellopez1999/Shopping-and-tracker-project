@@ -14,6 +14,7 @@ const CartOverlay: React.FC<SelectedProductProps> = ({
 }) => {
   const buyProducts = () => {
     console.log('PENDING TO BUILD');
+    console.log(cart);
   };
 
   return (
