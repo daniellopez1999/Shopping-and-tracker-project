@@ -78,10 +78,6 @@ const Products = () => {
     setSelectedProduct(null);
   };
 
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
-
   if (loading) return <p>Loading products...</p>;
   if (!loading && products.length === 0) return <p>No products found</p>;
 
