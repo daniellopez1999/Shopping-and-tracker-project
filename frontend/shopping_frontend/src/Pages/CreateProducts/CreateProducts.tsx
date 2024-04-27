@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import InputFileUpload from '../../Components/FileUpload/FileUpload';
 import { sendProductsAsBulk } from '../../utils/fetch';
 import SendButton from '../../Components/SendButton/SendButton';
+import BasicTextField from '../../Components/TextField/TextField';
 
 const CreateProducts = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -31,12 +32,31 @@ const CreateProducts = () => {
 
   return (
     <div>
-      <InputFileUpload setSelectedFile={setSelectedFile} />
-      {selectedFile ? (
-        <SendButton disabled={false} text="Send" onClick={() => sendCSV()} />
-      ) : (
-        <SendButton disabled={true} text="Send" />
-      )}
+      <div>
+        <h2>BULK</h2>
+        <div>
+          <InputFileUpload setSelectedFile={setSelectedFile} />
+          {selectedFile ? (
+            <SendButton
+              disabled={false}
+              text="Send"
+              onClick={() => sendCSV()}
+            />
+          ) : (
+            <SendButton disabled={true} text="Send" />
+          )}
+        </div>
+      </div>
+
+      <div>
+        <h2>Create a product</h2>
+        <BasicTextField type="text" placeholder="Name" />
+        <BasicTextField type="text" placeholder="Description" />
+        <BasicTextField type="number" placeholder="Price" />
+        <BasicTextField type="number" placeholder="Quantity" />
+        <BasicTextField type="text" placeholder="Url Image" />
+        <BasicTextField type="text" placeholder="Type" />
+      </div>
     </div>
   );
 };
