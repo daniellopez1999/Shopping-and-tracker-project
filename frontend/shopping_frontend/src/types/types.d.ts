@@ -30,3 +30,8 @@ export interface errorRepeatedProductsResponse {
   Error: string;
   repeatedProducts: ProductsReponse[];
 }
+
+export interface errorUnknown {
+  status: number;
+  error: ReadableStream<Uint8Array>;
+}

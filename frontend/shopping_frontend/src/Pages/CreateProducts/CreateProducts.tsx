@@ -22,6 +22,8 @@ const CreateProducts = () => {
           ', '
         )}`
       );
+    } else if (file.status === 400 && 'error' in file) {
+      window.alert(file.error);
     } else window.alert('Products created');
 
     setLoading(false);

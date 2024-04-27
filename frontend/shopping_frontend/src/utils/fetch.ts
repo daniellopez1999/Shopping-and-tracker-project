@@ -2,6 +2,7 @@ import {
   ProductsReponse,
   errorRepeatedProducts,
   errorRepeatedProductsResponse,
+  errorUnknown,
 } from '../types/types';
 
 export const getAllProducts = async () => {
@@ -29,7 +30,7 @@ export const getProductsFilteredByType = async (selectedTypes: string[]) => {
 
 export const sendProductsAsBulk = async (
   csv: any
-): Promise<Response | errorRepeatedProducts> => {
+): Promise<Response | errorUnknown | errorRepeatedProducts> => {
   try {
     const res = await fetch(
       `${import.meta.env.VITE_BACKEND_URL}products/bulk-products`,
@@ -46,6 +47,14 @@ export const sendProductsAsBulk = async (
           status: res.status,
           error: response.Error,
           repeatedProducts: response.repeatedProducts,
+        };
+        return error;
+      }
+
+      if (res.status === 400) {
+        const error: errorUnknown = {
+          status: res.status,
+          error: res.body!,
         };
         return error;
       }
