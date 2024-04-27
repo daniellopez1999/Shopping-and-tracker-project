@@ -38,5 +38,8 @@ export declare namespace ProductModule {
     ): Promise<ProductModule.Product[]>;
 
     public findProductsByType(type: string[]): Promise<ProductModule.Product[]>;
+    public saveProductsFromBulk(
+      productsToBulk: ProductModule.Product[] | undefined
+    ): Promise<ProductModule.Product[] | null>;
   }
 }

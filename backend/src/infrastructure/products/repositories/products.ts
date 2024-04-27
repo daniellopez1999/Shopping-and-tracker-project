@@ -46,6 +46,19 @@ export class ProductsMongoose implements ProductModule.ProductsRepository {
     }
   }
 
+  public async saveProductsFromBulk(
+    productsToBulk: ProductModule.Product[] | undefined
+  ): Promise<ProductModule.Product[] | null> {
+    try {
+      const products = await Product.insertMany(productsToBulk);
+
+      return products;
+    } catch (error) {
+      //@ts-ignore
+      return { Error: error };
+    }
+  }
+
   public async findById(id: string): Promise<ProductModule.Product | null> {
     try {
       const product = await Product.findById(id);

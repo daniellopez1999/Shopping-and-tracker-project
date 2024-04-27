@@ -7,6 +7,7 @@ import { BuyProducts } from '../services/productCases/buyProducts';
 import { GetProductsByType } from '../services/productCases/getProductsByType';
 import { CreateProductsTemplate } from '../services/productCases/createProductsTemplate';
 import { GetAllProductTypes } from '../services/productCases/getAllProductTypes';
+import { CreateProductsBulk } from '../services/productCases/createProductsBulk';
 
 export class Products {
   static async getById(req: Request, res: Response) {
@@ -79,6 +80,27 @@ export class Products {
       const product = await createProductsTemplate.exec();
 
       return res.status(200).json(product);
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ Error: error });
+    }
+  }
+
+  static async createProductsBulk(req: Request, res: Response) {
+    try {
+      const { file } = req;
+
+      if (!file) return res.status(500).json({ Error: 'File is required' });
+
+      if (file?.mimetype !== 'text/csv')
+        return res.status(500).json({ Error: 'File must be CSV' });
+
+      const productsDB = new ProductsMongoose();
+      const createProductsBulk = new CreateProductsBulk(productsDB);
+
+      const products = await createProductsBulk.exec(file);
+
+      return res.status(200).json(products);
     } catch (error) {
       console.log(error);
       return res.status(400).json({ Error: error });

@@ -1,6 +1,10 @@
 import express from 'express';
 import { Products } from '../controllers/products';
 import { isAuthenticated } from '../middlewares/isAuthenticated';
+import multer from 'multer';
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 const productsRouter = express.Router();
 
@@ -13,6 +17,11 @@ productsRouter.patch('/buy', isAuthenticated, Products.buyProducts);
 productsRouter.post(
   '/create-products-template',
   Products.createProductsTemplate
+);
+productsRouter.post(
+  '/bulk-products',
+  upload.single('csvFile'),
+  Products.createProductsBulk
 );
 
 export default productsRouter;

@@ -13,6 +13,7 @@ export class ProductClass implements ProductModule.Product {
   public image: string | undefined;
   public listOfProducts: ProductModule.ListOfProducts[] | undefined;
   public listOfProductsToUpdate: ProductModule.Product[] | undefined;
+  public productsToBulk: ProductModule.Product[] | undefined;
 
   constructor(storage: ProductModule.ProductsRepository) {
     this.storage = storage;
@@ -28,6 +29,13 @@ export class ProductClass implements ProductModule.Product {
       type: this.type,
     });
     return product;
+  }
+
+  public async saveProductsFromBulk(): Promise<ProductModule.Product[] | null> {
+    const products = await this.storage.saveProductsFromBulk(
+      this.productsToBulk
+    );
+    return products;
   }
 
   public async find() {
