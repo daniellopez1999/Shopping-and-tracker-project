@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import InputFileUpload from '../../Components/FileUpload/FileUpload';
 import { sendProductsAsBulk } from '../../utils/fetch';
+import SendButton from '../../Components/SendButton/SendButton';
 
 const CreateProducts = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const sendCSV = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const sendCSV = async () => {
     setLoading(true);
     const formData = new FormData();
     formData.append('csvFile', selectedFile!);
@@ -31,10 +31,12 @@ const CreateProducts = () => {
 
   return (
     <div>
-      <form onSubmit={sendCSV}>
-        <InputFileUpload setSelectedFile={setSelectedFile} />
-        {selectedFile ? <button>Send</button> : <button disabled>Send</button>}
-      </form>
+      <InputFileUpload setSelectedFile={setSelectedFile} />
+      {selectedFile ? (
+        <SendButton disabled={false} text="Send" onClick={() => sendCSV()} />
+      ) : (
+        <SendButton disabled={true} text="Send" />
+      )}
     </div>
   );
 };
