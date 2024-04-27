@@ -5,8 +5,8 @@ export interface Product {
   quantity: number;
   image: string;
   type: string;
-  _id: string;
-  __v: number;
+  _id?: string;
+  __v?: number;
 }
 
 export interface ProductsReponse {
