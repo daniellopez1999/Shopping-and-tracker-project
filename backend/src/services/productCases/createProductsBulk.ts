@@ -17,6 +17,32 @@ export class CreateProductsBulk {
       .fieldDelimiter(',')
       .csvStringToJson(csvBufferToString);
 
+    //Get All Products
+    const existingProducts = await product.getAll();
+    // return {
+    //   existingProducts: existingProducts,
+    //   products: product.productsToBulk,
+    // };
+
+    //Check if the name of each product is in the Products list
+    const repeatedProducts: ProductModule.Product[] = [];
+
+    product.productsToBulk.map((product) => {
+      existingProducts.map((existingProduct) => {
+        if (existingProduct.name == product.name)
+          repeatedProducts.push(existingProduct);
+      });
+    });
+
+    if (repeatedProducts.length > 0) {
+      return {
+        Error: 'The following products already exists: ',
+        repeatedProducts,
+      };
+    }
+    //Return that array with message the following products are already created
+    //don't create other products if at least 1 product exists
+
     const products = await product.saveProductsFromBulk();
 
     return products;

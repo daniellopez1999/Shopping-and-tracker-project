@@ -100,6 +100,8 @@ export class Products {
 
       const products = await createProductsBulk.exec(file);
 
+      if ('Error' in products!) return res.status(409).json(products);
+
       return res.status(200).json(products);
     } catch (error) {
       console.log(error);
