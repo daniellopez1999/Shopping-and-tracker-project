@@ -1,4 +1,5 @@
 import {
+  Product,
   ProductsReponse,
   errorRepeatedProducts,
   errorRepeatedProductsResponse,
@@ -26,6 +27,29 @@ export const getProductsFilteredByType = async (selectedTypes: string[]) => {
     )}`
   );
   return res.json();
+};
+
+export const getAllProductTypes = async () => {
+  const res = await fetch(
+    `${import.meta.env.VITE_BACKEND_URL}products/all-products-type`
+  );
+  return res.json();
+};
+
+export const createProduct = async (
+  product: Product
+): Promise<Product | { Message: string; Error: any }> => {
+  const res = await fetch(
+    `${import.meta.env.VITE_BACKEND_URL}products/create-product`,
+    {
+      method: 'POST',
+      body: JSON.stringify(product),
+    }
+  );
+  const response: Product = await res.json();
+  if (res.status !== 200)
+    return { Message: 'Could not create the product', Error: response };
+  return response;
 };
 
 export const sendProductsAsBulk = async (

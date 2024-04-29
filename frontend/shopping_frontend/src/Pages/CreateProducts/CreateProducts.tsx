@@ -1,11 +1,19 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import InputFileUpload from '../../Components/FileUpload/FileUpload';
-import { sendProductsAsBulk } from '../../utils/fetch';
+import {
+  createProduct,
+  getAllProductTypes,
+  sendProductsAsBulk,
+} from '../../utils/fetch';
 import SendButton from '../../Components/SendButton/SendButton';
 import { Product } from '../../types/types';
+import { validateProductData } from '../../utils/validators';
 
 const CreateProducts = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [productTypes, setProductTypes] = useState<string[]>([]);
+  const [didProductTypesLoad, setDidProductTypesLoad] =
+    useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [productData, setProductData] = useState<Product>({
     name: '',
@@ -38,10 +46,51 @@ const CreateProducts = () => {
     setLoading(false);
   };
 
-  const createproduct = (e: React.FormEvent<HTMLFormElement>) => {
+  const createproduct = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //Create product
+    //API Call Create Product
+    const isProductDataValid = validateProductData(productData);
+
+    if (!isProductDataValid) {
+      console.log(productData);
+      window.alert('Product Data is not valid');
+      return;
+    }
+
+    //If price is written with comma, change to .
+    if (productData.price.toString().includes(',')) {
+      let priceAsString = productData.price.toString();
+      priceAsString.replace(',', '.');
+      productData.price = parseFloat(priceAsString);
+    }
+
+    const product = await createProduct(productData);
+
+    if ('Error' in product) {
+      window.alert(product.Message);
+      return;
+    }
+    window.alert('Product created');
   };
+
+  useEffect(() => {
+    const fetchProductTypes = async () => {
+      const allProductTypes = await getAllProductTypes();
+      setProductTypes(allProductTypes);
+    };
+
+    fetchProductTypes();
+  }, []);
+
+  useEffect(() => {
+    if (productTypes) {
+      setProductData((prevProductData) => ({
+        ...prevProductData!,
+        type: productTypes[0],
+      }));
+      setDidProductTypesLoad(true);
+    }
+  }, [productTypes]);
 
   return (
     <div>
@@ -63,6 +112,7 @@ const CreateProducts = () => {
 
       <form onSubmit={(e) => createproduct(e)}>
         <h2>Create a product</h2>
+        <label>Name</label>
         <input
           type="text"
           placeholder="Name"
@@ -74,6 +124,8 @@ const CreateProducts = () => {
             }))
           }
         />
+        <label>Description</label>
+
         <input
           type="text"
           placeholder="Description"
@@ -85,6 +137,8 @@ const CreateProducts = () => {
             }))
           }
         />
+        <label>Price</label>
+
         <input
           type="number"
           placeholder="Price"
@@ -96,6 +150,8 @@ const CreateProducts = () => {
             }))
           }
         />
+        <label>Quantity</label>
+
         <input
           type="number"
           placeholder="Quantity"
@@ -107,6 +163,8 @@ const CreateProducts = () => {
             }))
           }
         />
+        <label>Type</label>
+
         <select
           value={productData.type}
           onChange={(e) =>
@@ -117,9 +175,13 @@ const CreateProducts = () => {
           }
         >
           {/* Fetch al Backend para recibir todos los posibles tipos */}
-          <option value="Snack">Snack</option>
-          <option value="Food">Food</option>
+          {productTypes.map((type, index) => (
+            <option value={type} key={index}>
+              {type}
+            </option>
+          ))}
         </select>
+        <label>Image URL</label>
 
         <input
           type="text"
