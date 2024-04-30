@@ -9,6 +9,11 @@ export interface Product {
   __v?: number;
 }
 
+export interface UserLogin {
+  username: string;
+  password: string;
+}
+
 export interface ProductsReponse {
   _id: string;
   name: string;

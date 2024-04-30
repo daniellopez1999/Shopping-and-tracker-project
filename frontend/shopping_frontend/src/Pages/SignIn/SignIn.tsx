@@ -10,17 +10,23 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { login } from '../../utils/fetch';
+import { UserLogin } from '../../types/types';
+import { useState } from 'react';
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [user, setUser] = useState<UserLogin>();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    console.log(user!);
+    const userLogin = await login(user!);
+
+    if (userLogin.status === 200) window.alert(userLogin.message);
+    if (userLogin.status !== 200) window.alert(userLogin.message);
   };
 
   return (
@@ -51,21 +57,35 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="Username"
+              label="Username"
+              name="username"
+              value={user?.username}
+              autoComplete="username"
               autoFocus
+              onChange={(e) =>
+                setUser((prevUser) => ({
+                  ...prevUser!,
+                  username: e.target.value,
+                }))
+              }
             />
             <TextField
               margin="normal"
               required
               fullWidth
+              value={user?.password}
               name="password"
               label="Password"
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) =>
+                setUser((prevUser) => ({
+                  ...prevUser!,
+                  password: e.target.value,
+                }))
+              }
             />
             <Button
               type="submit"

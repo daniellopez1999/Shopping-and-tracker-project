@@ -1,6 +1,7 @@
 import {
   Product,
   ProductsReponse,
+  UserLogin,
   errorRepeatedProducts,
   errorRepeatedProductsResponse,
   errorUnknown,
@@ -36,17 +37,40 @@ export const getAllProductTypes = async () => {
   return res.json();
 };
 
+export const login = async (
+  user: UserLogin
+): Promise<{ status: number; message: string }> => {
+  const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}auth/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify(user),
+  });
+  if (res.status === 200)
+    return { status: res.status, message: 'Login successful' };
+  else {
+    const { message }: { message: string } = await res.json();
+    const userError = { status: res.status, message: message };
+    return userError;
+  }
+};
+
 export const createProduct = async (
   product: Product
 ): Promise<Product | { Message: string; Error: any }> => {
+  console.log(product);
   const res = await fetch(
     `${import.meta.env.VITE_BACKEND_URL}products/create-product`,
     {
       method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(product),
     }
   );
-  const response: Product = await res.json();
+  const response = await res.json();
   if (res.status !== 200)
     return { Message: 'Could not create the product', Error: response };
   return response;
@@ -60,6 +84,8 @@ export const sendProductsAsBulk = async (
       `${import.meta.env.VITE_BACKEND_URL}products/bulk-products`,
       {
         method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
         body: csv,
       }
     );

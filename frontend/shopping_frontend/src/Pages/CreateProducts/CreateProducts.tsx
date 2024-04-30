@@ -63,7 +63,6 @@ const CreateProducts = () => {
       priceAsString.replace(',', '.');
       productData.price = parseFloat(priceAsString);
     }
-
     const product = await createProduct(productData);
 
     if ('Error' in product) {

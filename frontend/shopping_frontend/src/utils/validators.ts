@@ -1,4 +1,4 @@
-import { Product } from '../types/types';
+import { Product, UserLogin } from '../types/types';
 
 export const validateProductData = (productData: Product): boolean => {
   if (
@@ -12,4 +12,11 @@ export const validateProductData = (productData: Product): boolean => {
     return false;
   else if (!Number.isInteger(productData.quantity)) return false;
   return true;
+};
+
+export const validateUserData = (user: UserLogin) => {
+  if (!user.username || !user.password) {
+    throw new Error('Username or Password missing');
+  }
+  return user;
 };
