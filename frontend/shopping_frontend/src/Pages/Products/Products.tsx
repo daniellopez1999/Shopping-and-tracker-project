@@ -107,7 +107,7 @@ const Products = () => {
         {products.map((product, index) => (
           <div key={index} onClick={() => setSelectedProduct(product)}>
             <ProductCard
-              id={product._id}
+              id={product._id!}
               name={product.name}
               description={product.description}
               image={product.image}

@@ -6,6 +6,7 @@ import SignIn from './Pages/SignIn/SignIn';
 import SignUp from './Pages/SignUp/SignUp';
 import Orders from './Pages/Orders/Orders';
 import CreateProducts from './Pages/CreateProducts/CreateProducts';
+import Checkout from './Pages/Checkout/Checkout';
 
 const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
         <Route path="/sign-in" Component={SignIn} />
         <Route path="/sign-up" Component={SignUp} />
         <Route path="/orders" Component={Orders} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/admin/create-products" Component={CreateProducts} />
       </Routes>
     </Router>

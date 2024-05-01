@@ -1,5 +1,7 @@
+import Link from '@mui/material/Link';
 import { Product } from '../../types/types';
 import './cart-overlay.css';
+import ButtonReference from '../ButtonReference/ButtonReference';
 
 interface SelectedProductProps {
   cart: Product[];
@@ -28,6 +30,11 @@ const CartOverlay: React.FC<SelectedProductProps> = ({
             <h4>{product.quantity}</h4>
           </div>
         ))}
+        <ButtonReference
+          text="Buy Products"
+          reference="/checkout"
+          props={cart}
+        />
         <button onClick={() => buyProducts()}>Buy Products</button>
         <button onClick={() => setIsCartOpen(false)}>Close</button>
       </div>
