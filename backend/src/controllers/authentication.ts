@@ -53,6 +53,11 @@ export class Authentications {
         path: '/',
       });
 
+      res.cookie('user_id', encodeURIComponent(user._id), {
+        domain: 'localhost',
+        path: '/',
+      });
+
       return res.status(200).json({ user });
     } catch (error) {
       console.log(error);
