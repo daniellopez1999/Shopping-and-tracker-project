@@ -11,17 +11,55 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { UserRegisterInput } from '../../types/types';
+import { useState } from 'react';
+import { register } from '../../utils/fetch';
+import {
+  validatePasswordCharacter,
+  validatePasswords,
+  validateUserRegister,
+} from '../../utils/validators';
 
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [user, setUser] = useState<UserRegisterInput>();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+    const confirmPasswordsEqual = validatePasswords(
+      user!.password!,
+      user!.confirmPassword!
+    );
+
+    if (!confirmPasswordsEqual) {
+      window.alert("Passwords doesn't match");
+      return;
+    }
+
+    const passwordHasValidCharacters = validatePasswordCharacter(
+      user!.password!
+    );
+
+    if (!passwordHasValidCharacters) {
+      window.alert(
+        'Password must have at least 8 characters, 1 Uppercase and a number'
+      );
+      return;
+    }
+
+    const isUserDataValid = validateUserRegister(user!);
+
+    if (!isUserDataValid) {
+      window.alert('All input fields must be completed');
+      return;
+    }
+
+    const userRegister = await register(user!);
+
+    if (userRegister.status === 200) window.alert(userRegister.message);
+    if (userRegister.status !== 200) window.alert(userRegister.message);
   };
 
   return (
@@ -44,55 +82,97 @@ export default function SignUp() {
           </Typography>
           <Box
             component="form"
-            noValidate
             onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
+            noValidate
+            sx={{ mt: 1 }}
           >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}></Grid>
-            </Grid>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="Username"
+              label="Username"
+              name="username"
+              value={user?.username}
+              autoComplete="username"
+              autoFocus
+              onChange={(e) =>
+                setUser((prevUser) => ({
+                  ...prevUser!,
+                  username: e.target.value,
+                }))
+              }
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              value={user?.password}
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={(e) =>
+                setUser((prevUser) => ({
+                  ...prevUser!,
+                  password: e.target.value,
+                }))
+              }
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              value={user?.confirmPassword}
+              name="confirm-password"
+              label="Confirm Password"
+              type="password"
+              id="confirm-password"
+              autoComplete="confirm-current-password"
+              onChange={(e) =>
+                setUser((prevUser) => ({
+                  ...prevUser!,
+                  confirmPassword: e.target.value,
+                }))
+              }
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="Email"
+              label="Email"
+              name="email"
+              type="email"
+              value={user?.email}
+              autoComplete="email"
+              autoFocus
+              onChange={(e) =>
+                setUser((prevUser) => ({
+                  ...prevUser!,
+                  email: e.target.value,
+                }))
+              }
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="Phone"
+              label="Phone"
+              name="phone_number"
+              type="number"
+              value={user?.phone_number}
+              autoComplete="phone_number"
+              autoFocus
+              onChange={(e) =>
+                setUser((prevUser) => ({
+                  ...prevUser!,
+                  phone_number: Number(e.target.value),
+                }))
+              }
+            />
             <Button
               type="submit"
               fullWidth
@@ -101,14 +181,14 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Link href="#" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
       </Container>
     </ThemeProvider>

@@ -2,6 +2,7 @@ import {
   Product,
   ProductsReponse,
   UserLogin,
+  UserRegister,
   errorRepeatedProducts,
   errorRepeatedProductsResponse,
   errorUnknown,
@@ -50,6 +51,31 @@ export const login = async (
   });
   if (res.status === 200)
     return { status: res.status, message: 'Login successful' };
+  else {
+    const { message }: { message: string } = await res.json();
+    const userError = { status: res.status, message: message };
+    return userError;
+  }
+};
+
+export const register = async (
+  user: UserRegister
+): Promise<{ status: number; message: string }> => {
+  const userObject = {
+    username: user.username,
+    password: user.password,
+    email: user.email,
+    phone_number: user.phone_number,
+  };
+  const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}auth/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userObject),
+  });
+  if (res.status === 200)
+    return { status: res.status, message: 'Register successful' };
   else {
     const { message }: { message: string } = await res.json();
     const userError = { status: res.status, message: message };

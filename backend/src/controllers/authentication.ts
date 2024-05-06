@@ -18,6 +18,9 @@ export class Authentications {
         phone_number,
         role
       );
+
+      if ('Error' in user!)
+        return res.status(400).json({ message: user.Error });
       return res.status(200).json({ user });
     } catch (error) {
       console.log(error);

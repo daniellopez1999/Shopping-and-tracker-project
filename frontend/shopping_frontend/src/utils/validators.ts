@@ -1,4 +1,4 @@
-import { Product, UserLogin } from '../types/types';
+import { Product, UserLogin, UserRegisterInput } from '../types/types';
 
 export const validateProductData = (productData: Product): boolean => {
   if (
@@ -19,4 +19,31 @@ export const validateUserData = (user: UserLogin) => {
     throw new Error('Username or Password missing');
   }
   return user;
+};
+
+export const validatePasswords = (
+  password: string,
+  confirmPassword: string
+): boolean => {
+  if (password != confirmPassword) return false;
+  return true;
+};
+
+export const validateUserRegister = (user: UserRegisterInput) => {
+  if (
+    user.username &&
+    user.password &&
+    user.confirmPassword &&
+    user.email &&
+    user.phone_number
+  )
+    return true;
+  return false;
+};
+
+export const validatePasswordCharacter = (password: string): boolean => {
+  const regexValidationCharacters = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+  if (regexValidationCharacters.test(password)) return true;
+  return false;
 };

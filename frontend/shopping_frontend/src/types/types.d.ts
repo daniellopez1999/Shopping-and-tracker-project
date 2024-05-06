@@ -14,6 +14,21 @@ export interface UserLogin {
   password: string;
 }
 
+export interface UserRegister {
+  username: string;
+  password: string;
+  email: string;
+  phone_number: number;
+}
+
+export interface UserRegisterInput {
+  username: string;
+  password: string;
+  confirmPassword: string;
+  email: string;
+  phone_number: number;
+}
+
 export interface ProductsReponse {
   _id: string;
   name: string;
