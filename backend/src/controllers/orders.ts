@@ -50,7 +50,7 @@ export class Orders {
       const productsList = await buyProductsBeforeOrder.exec(products);
 
       if ('error' in productsList) {
-        return res.status(400).json({ error: productsList });
+        return res.status(404).json({ error: productsList });
       }
 
       const createOrder = new CreateOrder(ordersDB, usersDB);
