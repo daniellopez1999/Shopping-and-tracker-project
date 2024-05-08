@@ -13,7 +13,7 @@ const Checkout: React.FC = () => {
   const [addressData, setAddressData] = useState<AddressData>({
     city: '',
     country: '',
-    zipcode: 0,
+    zipcode: '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -88,12 +88,12 @@ const Checkout: React.FC = () => {
         ></input>
         <label>Zipcode</label>
         <input
-          type="number"
+          type="text"
           value={addressData!.zipcode}
           onChange={(e) =>
             setAddressData((prevAddressData) => ({
               ...prevAddressData!,
-              zipcode: Number(e.target.value),
+              zipcode: e.target.value,
             }))
           }
         ></input>

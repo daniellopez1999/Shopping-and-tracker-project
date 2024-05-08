@@ -7,6 +7,7 @@ import { BuyProducts } from '../services/productCases/buyProducts';
 import { FindOrder } from '../services/orderCases/findOrder';
 import { ChangeOrderStatus } from '../services/orderCases/changeOrderStatus';
 import { GetUnassignedOrders } from '../services/orderCases/getUnassignedOrders';
+import { validateCreateOrderData } from '../utils/validators';
 
 export class Orders {
   static async getByID(req: Request, res: Response) {
@@ -28,6 +29,18 @@ export class Orders {
   static async createOrder(req: Request, res: Response) {
     try {
       const { products, user_id, user_email, address } = req.body;
+
+      const isCreateOrderDataValid = validateCreateOrderData({
+        products,
+        user_id,
+        user_email,
+        address,
+      });
+
+      if (!isCreateOrderDataValid)
+        return res
+          .status(400)
+          .json({ error: 'Order could not be created due missing parameters' });
 
       const productsDB = new ProductsMongoose();
       const usersDB = new UsersMongoose();

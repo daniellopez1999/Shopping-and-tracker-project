@@ -69,7 +69,7 @@ export const validateAddressData = (addressData: AddressData) => {
   if (
     addressData.city == '' ||
     addressData.country == '' ||
-    addressData.zipcode == 0
+    addressData.zipcode == ''
   )
     return false;
   return true;

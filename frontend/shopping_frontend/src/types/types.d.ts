@@ -59,7 +59,7 @@ export interface errorUnknown {
 export interface AddressData {
   country: string;
   city: string;
-  zipcode: number;
+  zipcode: string;
 }
 
 export interface SubmitOrderData {
