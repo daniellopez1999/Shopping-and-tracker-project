@@ -16,6 +16,7 @@ export class Order implements OrderModule.Order {
     | 'DELIVERED'
     | 'COMPLETED'
     | undefined;
+  public courier_id: string | undefined;
   public createdAt: Date | undefined;
   public updatedAt: Date | undefined;
   public email: string | undefined;
@@ -37,6 +38,14 @@ export class Order implements OrderModule.Order {
 
   public async find(): Promise<OrderModule.Order> {
     const order = await this.storage.findByID(this._id!);
+    return order;
+  }
+
+  public async findOrderAndAssignToCourier(): Promise<OrderModule.Order> {
+    const order = await this.storage.findOrderAndAssignToCourier(
+      this._id!,
+      this.courier_id!
+    );
     return order;
   }
 

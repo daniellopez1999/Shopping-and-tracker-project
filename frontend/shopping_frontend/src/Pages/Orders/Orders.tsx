@@ -38,6 +38,9 @@ const Orders = () => {
 
   useEffect(() => {
     //if userRole === Client get orders from user_id
+    // In Backend, find for on-going orders and put in a component in orders page
+    // Put in another component delivered orderes
+    // If no orders available, show no orders done
     //if userRole === Courier check if courier has an assigned order (create endpoint in backend)
     // if courier doesn't have assigned orders get unassigned orders
   }, [userRole]);

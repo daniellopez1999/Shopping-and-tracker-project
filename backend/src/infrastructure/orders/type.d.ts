@@ -13,6 +13,7 @@ export declare namespace OrderModule {
       | 'ON DELIVERY'
       | 'DELIVERED'
       | 'COMPLETED';
+    courier_id?: string;
     createdAt?: Date;
     updatedAt?: Date;
     email?: string;
@@ -37,5 +38,9 @@ export declare namespace OrderModule {
       order: OrderModule.Order
     ): Promise<OrderModule.Order | OrderModule.Error>;
     public findUnassignedOrders(): Promise<OrderModule.Order[]>;
+    public findOrderAndAssignToCourier(
+      order_id: string,
+      courier_id: string
+    ): Promise<OrderModule.Order>;
   }
 }

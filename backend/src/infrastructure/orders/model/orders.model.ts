@@ -43,6 +43,10 @@ const OrderSchema = new mongoose.Schema(
       default: 'PENDING TO BE ACCEPTED',
       required: true,
     },
+    courier_id: {
+      type: String,
+      default: 'UNASSIGNED',
+    },
     user_id: {
       type: String,
       required: true,

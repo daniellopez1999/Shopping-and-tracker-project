@@ -38,7 +38,7 @@ export class OrdersMongoose implements OrderModule.OrderRepository {
 
       if (order.status) orderWithOldStatus!.status = order.status;
 
-      orderWithOldStatus!.save();
+      await orderWithOldStatus!.save();
 
       return orderWithOldStatus as unknown as OrderModule.Order;
     } catch (error) {
@@ -52,6 +52,24 @@ export class OrdersMongoose implements OrderModule.OrderRepository {
       const orders = await Order.find({ status: 'PENDING TO BE ACCEPTED' });
 
       return orders as unknown as OrderModule.Order[];
+    } catch (error) {
+      //@ts-ignore
+      return { Error: error };
+    }
+  }
+
+  public async findOrderAndAssignToCourier(
+    order_id: string,
+    courier_id: string
+  ): Promise<OrderModule.Order> {
+    try {
+      const order = await Order.findByIdAndUpdate(
+        order_id,
+        { courier_id: courier_id },
+        { new: true }
+      );
+
+      return order as unknown as OrderModule.Order;
     } catch (error) {
       //@ts-ignore
       return { Error: error };

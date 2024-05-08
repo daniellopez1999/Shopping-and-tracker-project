@@ -8,6 +8,7 @@ import { FindOrder } from '../services/orderCases/findOrder';
 import { ChangeOrderStatus } from '../services/orderCases/changeOrderStatus';
 import { GetUnassignedOrders } from '../services/orderCases/getUnassignedOrders';
 import { validateCreateOrderData } from '../utils/validators';
+import { AssignOrderToCourier } from '../services/orderCases/assignOrderToCourier';
 
 export class Orders {
   static async getByID(req: Request, res: Response) {
@@ -79,6 +80,27 @@ export class Orders {
       const order = await changeOrderStatus.exec(id);
 
       return res.status(200).json({ order });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ Error: error });
+    }
+  }
+
+  static async assignOrder(req: Request, res: Response) {
+    try {
+      const { courier_id, order_id } = req.body;
+
+      const ordersDB = new OrdersMongoose();
+
+      const assignOrder = new AssignOrderToCourier(ordersDB);
+
+      await assignOrder.exec(order_id, courier_id);
+
+      const changeStatus = new ChangeOrderStatus(ordersDB);
+
+      const changedStatus = await changeStatus.exec(order_id);
+
+      return res.status(200).json(changedStatus);
     } catch (error) {
       console.log(error);
       return res.status(400).json({ Error: error });

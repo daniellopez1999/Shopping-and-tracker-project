@@ -15,6 +15,12 @@ ordersRouter.get('/user-orders/:id', isAuthenticated, Orders.getUserOrders);
 ordersRouter.get('/:id', isAuthenticated, Orders.getByID);
 ordersRouter.post('/create-order', isAuthenticated, Orders.createOrder);
 ordersRouter.patch(
+  '/assign-order',
+  isAuthenticated,
+  CheckUserRole.NotClient,
+  Orders.assignOrder
+);
+ordersRouter.patch(
   '/change-status',
   isAuthenticated,
   CheckUserRole.NotClient,
