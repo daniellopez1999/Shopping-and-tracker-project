@@ -1,6 +1,9 @@
 import {
+  FetchResponse,
+  OrderCreationResponse,
   Product,
   ProductsReponse,
+  SubmitOrderData,
   UserLogin,
   UserRegister,
   errorRepeatedProducts,
@@ -86,7 +89,6 @@ export const register = async (
 export const createProduct = async (
   product: Product
 ): Promise<Product | { Message: string; Error: any }> => {
-  console.log(product);
   const res = await fetch(
     `${import.meta.env.VITE_BACKEND_URL}products/create-product`,
     {
@@ -143,4 +145,55 @@ export const sendProductsAsBulk = async (
     console.error('Error sending bulk products:', error);
     throw error;
   }
+};
+
+export const createOrder = async (
+  orderData: SubmitOrderData
+): Promise<FetchResponse> => {
+  const res = await fetch(
+    `${import.meta.env.VITE_BACKEND_URL}orders/create-order`,
+    {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderData),
+    }
+  );
+
+  if (res.status === 401) {
+    const err: FetchResponse = {
+      status: res.status,
+      message: 'Order could not be created due missing parameters',
+    };
+    return err;
+  }
+
+  if (res.status === 404) {
+    const err: FetchResponse = {
+      status: res.status,
+      message: 'The store has not enough quantity of the selected products',
+    };
+    return err;
+  }
+
+  if (res.status === 400) {
+    const err: FetchResponse = {
+      status: res.status,
+      message: 'Error creating order, please try again later',
+    };
+    return err;
+  }
+
+  if (res.status === 200) {
+    const orderCreated: FetchResponse = {
+      status: res.status,
+      message: 'Order Created',
+    };
+    return orderCreated;
+  }
+
+  return Promise.reject({
+    status: res.status,
+    message: 'Unexpected error occurred while creating order',
+  });
 };

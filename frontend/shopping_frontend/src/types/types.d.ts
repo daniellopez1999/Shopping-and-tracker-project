@@ -59,12 +59,35 @@ export interface errorUnknown {
 export interface AddressData {
   country: string;
   city: string;
-  zipcode: string;
+  zip_code: string;
 }
 
 export interface SubmitOrderData {
   products: Product[];
-  savedUserID: string;
-  savedEmail: string;
-  addressData: AddressData;
+  user_id: string;
+  user_email: string;
+  address: AddressData;
+}
+
+export interface OrderCreationResponse {
+  status: number;
+  order: Order;
+}
+
+export interface Order {
+  products: Product[];
+  address: Address;
+  total_price: number;
+  status: string;
+  user_id: string;
+  email: string;
+  _id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+}
+
+export interface FetchResponse {
+  status: number;
+  message: string;
 }

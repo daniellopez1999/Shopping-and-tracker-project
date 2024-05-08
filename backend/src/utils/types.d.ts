@@ -13,6 +13,7 @@ export interface Product {
   quantity: number;
   type: string;
   image: string;
+  __v?: number;
 }
 
 export interface Address {

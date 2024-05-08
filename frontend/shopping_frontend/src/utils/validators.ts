@@ -56,10 +56,10 @@ export const validatePasswordCharacter = (password: string): boolean => {
 
 export const validateSubmitOrder = (orderData: SubmitOrderData): boolean => {
   if (
-    !orderData.savedEmail ||
-    !orderData.savedUserID ||
+    !orderData.user_email ||
+    !orderData.user_id ||
     !orderData.products ||
-    !orderData.addressData
+    !orderData.address
   )
     return false;
   return true;
@@ -69,7 +69,7 @@ export const validateAddressData = (addressData: AddressData) => {
   if (
     addressData.city == '' ||
     addressData.country == '' ||
-    addressData.zipcode == ''
+    addressData.zip_code == ''
   )
     return false;
   return true;

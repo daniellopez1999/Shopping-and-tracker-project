@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AddressData, Product } from '../../types/types';
+import { AddressData, Product, SubmitOrderData } from '../../types/types';
 import { useLocation } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import {
@@ -7,25 +7,27 @@ import {
   validateSubmitOrder,
 } from '../../utils/validators';
 
+import { createOrder } from '../../utils/fetch';
+
 const Checkout: React.FC = () => {
   const location = useLocation();
   const products: Product[] = location.state;
   const [addressData, setAddressData] = useState<AddressData>({
     city: '',
     country: '',
-    zipcode: '',
+    zip_code: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const savedUserID = Cookies.get('user_id')!;
     const savedEmail = Cookies.get('email')!;
 
     const isSubmitValid = validateSubmitOrder({
       products,
-      savedUserID,
-      savedEmail,
-      addressData,
+      user_email: savedUserID,
+      user_id: savedEmail,
+      address: addressData,
     });
 
     if (!isSubmitValid) {
@@ -40,13 +42,22 @@ const Checkout: React.FC = () => {
       return;
     }
 
-    const productsAndUser = {
+    const productsAndUser: SubmitOrderData = {
       products,
       user_id: savedUserID,
       user_email: savedEmail,
       address: addressData,
     };
-    console.log(productsAndUser);
+
+    const order = await createOrder(productsAndUser);
+
+    if (order.status === 200) {
+      window.alert(order.message);
+      return;
+    } else {
+      window.alert(order.message);
+      return;
+    }
   };
 
   return (
@@ -89,11 +100,11 @@ const Checkout: React.FC = () => {
         <label>Zipcode</label>
         <input
           type="text"
-          value={addressData!.zipcode}
+          value={addressData!.zip_code}
           onChange={(e) =>
             setAddressData((prevAddressData) => ({
               ...prevAddressData!,
-              zipcode: e.target.value,
+              zip_code: e.target.value,
             }))
           }
         ></input>

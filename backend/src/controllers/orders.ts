@@ -39,7 +39,7 @@ export class Orders {
 
       if (!isCreateOrderDataValid)
         return res
-          .status(400)
+          .status(401)
           .json({ error: 'Order could not be created due missing parameters' });
 
       const productsDB = new ProductsMongoose();
