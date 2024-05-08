@@ -36,6 +36,12 @@ const Orders = () => {
     checkUserRole();
   }, []);
 
+  useEffect(() => {
+    //if userRole === Client get orders from user_id
+    //if userRole === Courier check if courier has an assigned order (create endpoint in backend)
+    // if courier doesn't have assigned orders get unassigned orders
+  }, [userRole]);
+
   return <div>orders {userRole}</div>;
 };
 
