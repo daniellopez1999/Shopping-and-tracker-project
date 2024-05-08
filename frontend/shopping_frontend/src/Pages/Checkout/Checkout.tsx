@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AddressData, Product, SubmitOrderData } from '../../types/types';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import {
   validateAddressData,
@@ -10,6 +10,8 @@ import {
 import { createOrder } from '../../utils/fetch';
 
 const Checkout: React.FC = () => {
+  const navigate = useNavigate();
+
   const location = useLocation();
   const products: Product[] = location.state;
   const [addressData, setAddressData] = useState<AddressData>({
@@ -53,6 +55,7 @@ const Checkout: React.FC = () => {
 
     if (order.status === 200) {
       window.alert(order.message);
+      navigate('/');
       return;
     } else {
       window.alert(order.message);

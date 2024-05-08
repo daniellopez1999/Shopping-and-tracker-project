@@ -3,6 +3,7 @@ import { UsersMongoose } from '../infrastructure/users/repositories/users';
 
 import { FindUserByUsername } from '../services/usersCases/findUserByUsername';
 import { DeleteUserByID } from '../services/usersCases/deleteUserById';
+import { GetUserRole } from '../services/usersCases/getUserRole';
 
 export class UsersController {
   static async findUser(req: Request, res: Response) {
@@ -32,6 +33,22 @@ export class UsersController {
       const user = await userDelete.exec(id);
 
       return res.status(200).json({ user });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ Error: error });
+    }
+  }
+
+  static async getUserRole(req: Request, res: Response) {
+    try {
+      const { userid } = req.params;
+      const usersDB = new UsersMongoose();
+
+      const userRole = new GetUserRole(usersDB);
+
+      const role = await userRole.exec(userid);
+
+      return res.status(200).json({ role });
     } catch (error) {
       console.log(error);
       return res.status(400).json({ Error: error });

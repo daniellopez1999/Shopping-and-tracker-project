@@ -197,3 +197,27 @@ export const createOrder = async (
     message: 'Unexpected error occurred while creating order',
   });
 };
+
+export const getUserRole = async (user_id: string): Promise<FetchResponse> => {
+  const res = await fetch(
+    `${import.meta.env.VITE_BACKEND_URL}users/user-role/${user_id}`,
+    {
+      method: 'GET',
+      credentials: 'include',
+    }
+  );
+  if (res.status === 200) {
+    const { role } = await res.json();
+    const user: FetchResponse = {
+      status: res.status,
+      message: role,
+    };
+    return user;
+  } else {
+    const err: FetchResponse = {
+      status: res.status,
+      message: 'Could not get User Role',
+    };
+    return err;
+  }
+};

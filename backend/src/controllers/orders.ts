@@ -99,4 +99,13 @@ export class Orders {
       return res.status(400).json({ Error: error });
     }
   }
+
+  static async getUserOrders(_req: Request, res: Response) {
+    try {
+      return res.status(200).json();
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ Error: error });
+    }
+  }
 }

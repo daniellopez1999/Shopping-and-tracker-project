@@ -11,6 +11,11 @@ usersRouter.get(
   CheckUserRole.onlyAdmins,
   UsersController.findUser
 );
+usersRouter.get(
+  '/user-role/:userid',
+  isAuthenticated,
+  UsersController.getUserRole
+);
 usersRouter.delete(
   '/delete/:id',
   isAuthenticated,
