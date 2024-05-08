@@ -55,3 +55,16 @@ export interface errorUnknown {
   status: number;
   error: ReadableStream<Uint8Array>;
 }
+
+export interface AddressData {
+  country: string;
+  city: string;
+  zipcode: number;
+}
+
+export interface SubmitOrderData {
+  products: Product[];
+  savedUserID: string;
+  savedEmail: string;
+  addressData: AddressData;
+}

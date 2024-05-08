@@ -12,12 +12,7 @@ ordersRouter.get(
   Orders.getUnassignedOrders
 );
 ordersRouter.get('/:id', isAuthenticated, Orders.getByID);
-ordersRouter.post(
-  '/create-order',
-  isAuthenticated,
-  CheckUserRole.NotClient,
-  Orders.createOrder
-);
+ordersRouter.post('/create-order', isAuthenticated, Orders.createOrder);
 ordersRouter.patch(
   '/change-status',
   isAuthenticated,

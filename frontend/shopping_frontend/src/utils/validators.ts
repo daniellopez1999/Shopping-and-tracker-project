@@ -1,4 +1,10 @@
-import { Product, UserLogin, UserRegisterInput } from '../types/types';
+import {
+  AddressData,
+  Product,
+  SubmitOrderData,
+  UserLogin,
+  UserRegisterInput,
+} from '../types/types';
 
 export const validateProductData = (productData: Product): boolean => {
   if (
@@ -46,4 +52,25 @@ export const validatePasswordCharacter = (password: string): boolean => {
 
   if (regexValidationCharacters.test(password)) return true;
   return false;
+};
+
+export const validateSubmitOrder = (orderData: SubmitOrderData): boolean => {
+  if (
+    !orderData.savedEmail ||
+    !orderData.savedUserID ||
+    !orderData.products ||
+    !orderData.addressData
+  )
+    return false;
+  return true;
+};
+
+export const validateAddressData = (addressData: AddressData) => {
+  if (
+    addressData.city == '' ||
+    addressData.country == '' ||
+    addressData.zipcode == 0
+  )
+    return false;
+  return true;
 };

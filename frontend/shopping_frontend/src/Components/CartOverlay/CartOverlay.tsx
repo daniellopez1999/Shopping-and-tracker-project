@@ -35,7 +35,6 @@ const CartOverlay: React.FC<SelectedProductProps> = ({
           reference="/checkout"
           props={cart}
         />
-        <button onClick={() => buyProducts()}>Buy Products</button>
         <button onClick={() => setIsCartOpen(false)}>Close</button>
       </div>
     )
