@@ -9,6 +9,8 @@ import { ChangeOrderStatus } from '../services/orderCases/changeOrderStatus';
 import { GetUnassignedOrders } from '../services/orderCases/getUnassignedOrders';
 import { validateCreateOrderData } from '../utils/validators';
 import { AssignOrderToCourier } from '../services/orderCases/assignOrderToCourier';
+import { GetDeliveredClientOrders } from '../services/orderCases/getDeliveredClientOrders';
+import { GetUndeliveredClientOrders } from '../services/orderCases/getUndeliveredClientOrders';
 
 export class Orders {
   static async getByID(req: Request, res: Response) {
@@ -122,9 +124,34 @@ export class Orders {
     }
   }
 
-  static async getUserOrders(_req: Request, res: Response) {
+  static async getDeliveredClientOrders(req: Request, res: Response) {
     try {
-      return res.status(200).json();
+      const { user_id } = req.params;
+
+      const ordersDB = new OrdersMongoose();
+
+      const orders = new GetDeliveredClientOrders(ordersDB);
+
+      const deliveredOrders = await orders.exec(user_id);
+
+      return res.status(200).json(deliveredOrders);
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ Error: error });
+    }
+  }
+
+  static async getUndeliveredClientOrders(req: Request, res: Response) {
+    try {
+      const { user_id } = req.params;
+
+      const ordersDB = new OrdersMongoose();
+
+      const orders = new GetUndeliveredClientOrders(ordersDB);
+
+      const undeliveredOrders = await orders.exec(user_id);
+
+      return res.status(200).json(undeliveredOrders);
     } catch (error) {
       console.log(error);
       return res.status(400).json({ Error: error });

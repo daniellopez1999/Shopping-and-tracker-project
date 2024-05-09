@@ -13,6 +13,41 @@ export class OrdersMongoose implements OrderModule.OrderRepository {
     }
   }
 
+  public async findDeliveredClientOrders(
+    user_id: string
+  ): Promise<OrderModule.Order[]> {
+    try {
+      const includedStatus = ['DELIVERED', 'COMPLETED'];
+
+      const order = await Order.find({
+        user_id: user_id,
+        status: { $in: includedStatus },
+      });
+
+      return order as unknown as OrderModule.Order[];
+    } catch (error) {
+      //@ts-ignore
+      return { Error: error };
+    }
+  }
+
+  public async findUndeliveredClientOrders(
+    user_id: string
+  ): Promise<OrderModule.Order[]> {
+    try {
+      const excludedStatus = ['DELIVERED', 'COMPLETED'];
+      const order = await Order.find({
+        user_id: user_id,
+        status: { $nin: excludedStatus },
+      });
+
+      return order as unknown as OrderModule.Order[];
+    } catch (error) {
+      //@ts-ignore
+      return { Error: error };
+    }
+  }
+
   public async createOrder(
     orderData: OrderModule.Order
   ): Promise<OrderModule.Order> {

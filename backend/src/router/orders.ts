@@ -11,7 +11,16 @@ ordersRouter.get(
   CheckUserRole.NotClient,
   Orders.getUnassignedOrders
 );
-ordersRouter.get('/user-orders/:id', isAuthenticated, Orders.getUserOrders);
+ordersRouter.get(
+  '/delivered-user-orders/:user_id',
+  isAuthenticated,
+  Orders.getDeliveredClientOrders
+);
+ordersRouter.get(
+  '/undelivered-user-orders/:user_id',
+  isAuthenticated,
+  Orders.getUndeliveredClientOrders
+);
 ordersRouter.get('/:id', isAuthenticated, Orders.getByID);
 ordersRouter.post('/create-order', isAuthenticated, Orders.createOrder);
 ordersRouter.patch(

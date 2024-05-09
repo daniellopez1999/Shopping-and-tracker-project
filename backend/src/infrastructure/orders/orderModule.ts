@@ -49,6 +49,18 @@ export class Order implements OrderModule.Order {
     return order;
   }
 
+  public async findDeliveredClientOrders(): Promise<OrderModule.Order[]> {
+    const orders = await this.storage.findDeliveredClientOrders(this.user_id!);
+    return orders;
+  }
+
+  public async findUndeliveredClientOrders(): Promise<OrderModule.Order[]> {
+    const orders = await this.storage.findUndeliveredClientOrders(
+      this.user_id!
+    );
+    return orders;
+  }
+
   public async changeOrderStatus(): Promise<
     OrderModule.Order | OrderModule.Error
   > {
