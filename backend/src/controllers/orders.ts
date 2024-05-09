@@ -11,6 +11,7 @@ import { validateCreateOrderData } from '../utils/validators';
 import { AssignOrderToCourier } from '../services/orderCases/assignOrderToCourier';
 import { GetDeliveredClientOrders } from '../services/orderCases/getDeliveredClientOrders';
 import { GetUndeliveredClientOrders } from '../services/orderCases/getUndeliveredClientOrders';
+import { GetCourierAssignedOrder } from '../services/orderCases/getCourierAssignedOrder';
 
 export class Orders {
   static async getByID(req: Request, res: Response) {
@@ -117,7 +118,7 @@ export class Orders {
 
       const unassignedOrders = await orders.exec();
 
-      return res.status(200).json({ unassignedOrders });
+      return res.status(200).json(unassignedOrders);
     } catch (error) {
       console.log(error);
       return res.status(400).json({ Error: error });
@@ -152,6 +153,23 @@ export class Orders {
       const undeliveredOrders = await orders.exec(user_id);
 
       return res.status(200).json(undeliveredOrders);
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ Error: error });
+    }
+  }
+
+  static async getCourierAssignedOrder(req: Request, res: Response) {
+    try {
+      const { courier_id } = req.params;
+
+      const ordersDB = new OrdersMongoose();
+
+      const order = new GetCourierAssignedOrder(ordersDB);
+
+      const assignedOrder = await order.exec(courier_id);
+
+      return res.status(200).json(assignedOrder);
     } catch (error) {
       console.log(error);
       return res.status(400).json({ Error: error });

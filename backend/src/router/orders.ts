@@ -21,6 +21,12 @@ ordersRouter.get(
   isAuthenticated,
   Orders.getUndeliveredClientOrders
 );
+ordersRouter.get(
+  '/courier-assigned-order/:courier_id',
+  isAuthenticated,
+  CheckUserRole.NotClient,
+  Orders.getCourierAssignedOrder
+);
 ordersRouter.get('/:id', isAuthenticated, Orders.getByID);
 ordersRouter.post('/create-order', isAuthenticated, Orders.createOrder);
 ordersRouter.patch(

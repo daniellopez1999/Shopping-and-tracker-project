@@ -48,5 +48,8 @@ export declare namespace OrderModule {
     public findUndeliveredClientOrders(
       user_id: string
     ): Promise<OrderModule.Order[]>;
+    public findCourierAssignedOrder(
+      courier_id: string
+    ): Promise<OrderModule.Order | null>;
   }
 }

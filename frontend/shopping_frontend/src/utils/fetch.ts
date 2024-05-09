@@ -40,6 +40,30 @@ export const getUndeliveredClientOrders = async (user_id: string) => {
   return res.json();
 };
 
+export const fetchCourierAssignedOrder = async (courier_id: string) => {
+  const res = await fetch(
+    `${
+      import.meta.env.VITE_BACKEND_URL
+    }orders/courier-assigned-order/${courier_id}`,
+    {
+      method: 'GET',
+      credentials: 'include',
+    }
+  );
+  return res.json();
+};
+
+export const getUnassignedOrders = async () => {
+  const res = await fetch(
+    `${import.meta.env.VITE_BACKEND_URL}orders//unassigned-orders`,
+    {
+      method: 'GET',
+      credentials: 'include',
+    }
+  );
+  return res.json();
+};
+
 export const getAllTypes = async () => {
   const res = await fetch(
     `${import.meta.env.VITE_BACKEND_URL}products/all-products-type`

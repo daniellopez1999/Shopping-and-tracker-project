@@ -2,7 +2,9 @@ import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
+  fetchCourierAssignedOrder,
   getDeliveredClientOrders,
+  getUnassignedOrders,
   getUndeliveredClientOrders,
   getUserRole,
 } from '../../utils/fetch';
@@ -16,6 +18,9 @@ const Orders = () => {
   const [deliveredOrders, setDeliveredOrders] = useState<Order[]>();
   const [undeliveredOrders, setUndeliveredOrders] = useState<Order[]>();
   const [loadedOrders, setLoadedOrders] = useState<boolean>(false);
+  const [courierAssignedOrder, setCourierAssignedOrder] =
+    useState<Order | null>(null);
+  const [unassignedOrders, setUnassignedOrders] = useState<Order[]>();
 
   useEffect(() => {
     if (!user_id) {
@@ -69,11 +74,30 @@ const Orders = () => {
     }
 
     if (userRole === 'Courier') {
-      //if userRole === Courier check if courier has an assigned order (create endpoint in backend)
-      // if courier doesn't have assigned orders get unassigned orders
+      const fetchCourAssignedOrder = async () => {
+        const assignedOrder = await fetchCourierAssignedOrder(user_id!);
+        return assignedOrder;
+      };
+
+      const fetchUnassignedOrders = async () => {
+        const unassignedOrders = await getUnassignedOrders();
+        return unassignedOrders;
+      };
 
       const setOrders = async () => {
-        setLoadedOrders(true);
+        const assignedOrder = await fetchCourAssignedOrder();
+
+        if (assignedOrder != null) {
+          setCourierAssignedOrder(assignedOrder);
+          setLoadedOrders(true);
+          return;
+        }
+
+        if (assignedOrder == null) {
+          const unassignedOrdrs = await fetchUnassignedOrders();
+          setUnassignedOrders(unassignedOrdrs);
+          setLoadedOrders(true);
+        }
       };
 
       setOrders();
@@ -89,8 +113,8 @@ const Orders = () => {
           <div>
             {deliveredOrders!.map((order, index) => (
               <div key={index}>
-                <h3>{order.createdAt.toString()}</h3>
-                <h3>{order.products.toString()}</h3>
+                <h3>Created at: {order.createdAt.toString()}</h3>
+                <h3>Products: {order.products.toString()}</h3>
               </div>
             ))}
           </div>
@@ -98,14 +122,35 @@ const Orders = () => {
           <div>
             {undeliveredOrders!.map((order, index) => (
               <div key={index}>
-                <h3>{order.createdAt.toString()}</h3>
-                <h3>{order.products.toString()}</h3>
+                <h3>Created at: {order.createdAt.toString()}</h3>
+                <h3>Products: {order.products.toString()}</h3>
               </div>
             ))}
           </div>
         </div>
       )}
-      {userRole === 'Courier' && <div>Courier</div>}
+      {userRole === 'Courier' && (
+        <div>
+          Courier
+          <div>
+            {courierAssignedOrder != null ? (
+              <div>Assigned Order ID: {courierAssignedOrder._id}</div>
+            ) : (
+              <div>
+                Unassigned Orders:{' '}
+                {unassignedOrders?.map((order, key) => (
+                  <div key={key}>
+                    <h3>
+                      <h3>Order ID: {order._id}</h3>
+                    </h3>
+                    <h3>Created at: {order.createdAt.toString()}</h3>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -48,6 +48,25 @@ export class OrdersMongoose implements OrderModule.OrderRepository {
     }
   }
 
+  public async findCourierAssignedOrder(
+    courier_id: string
+  ): Promise<OrderModule.Order | null> {
+    try {
+      const excludedStatus = ['DELIVERED', 'COMPLETED'];
+      const order = await Order.find({
+        courier_id: courier_id,
+        status: { $nin: excludedStatus },
+      });
+
+      if (order.length === 0) return null;
+
+      return order[0] as unknown as OrderModule.Order;
+    } catch (error) {
+      //@ts-ignore
+      return { Error: error };
+    }
+  }
+
   public async createOrder(
     orderData: OrderModule.Order
   ): Promise<OrderModule.Order> {

@@ -61,6 +61,13 @@ export class Order implements OrderModule.Order {
     return orders;
   }
 
+  public async findCourierAssignedOrder(): Promise<OrderModule.Order | null> {
+    const orders = await this.storage.findCourierAssignedOrder(
+      this.courier_id!
+    );
+    return orders;
+  }
+
   public async changeOrderStatus(): Promise<
     OrderModule.Order | OrderModule.Error
   > {
