@@ -1,13 +1,21 @@
 import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUserRole } from '../../utils/fetch';
+import {
+  getDeliveredClientOrders,
+  getUndeliveredClientOrders,
+  getUserRole,
+} from '../../utils/fetch';
+import { Order } from '../../types/types';
 
 const Orders = () => {
   const user_id = Cookies.get('user_id');
   const navigate = useNavigate();
 
   const [userRole, setUserRole] = useState<string>();
+  const [deliveredOrders, setDeliveredOrders] = useState<Order[]>();
+  const [undeliveredOrders, setUndeliveredOrders] = useState<Order[]>();
+  const [loadedOrders, setLoadedOrders] = useState<boolean>(false);
 
   useEffect(() => {
     if (!user_id) {
@@ -38,21 +46,65 @@ const Orders = () => {
 
   useEffect(() => {
     if (userRole === 'Client') {
-      //if userRole === Client get orders from user_id
-      // In Backend, find for on-going orders and put in a component in orders page
-      // Put in another component delivered orderes
-      // If no orders available, show no orders done
+      const fetchDeliveredOrders = async () => {
+        const deliveredOrders = await getDeliveredClientOrders(user_id!);
+        return deliveredOrders;
+      };
+
+      const fetchUndeliveredOrders = async () => {
+        const deliveredOrders = await getUndeliveredClientOrders(user_id!);
+        return deliveredOrders;
+      };
+
+      const setOrders = async () => {
+        const deliveredOrders = await fetchDeliveredOrders();
+        const undeliveredOrders = await fetchUndeliveredOrders();
+
+        setDeliveredOrders(deliveredOrders);
+        setUndeliveredOrders(undeliveredOrders);
+        setLoadedOrders(true);
+      };
+
+      setOrders();
     }
 
     if (userRole === 'Courier') {
       //if userRole === Courier check if courier has an assigned order (create endpoint in backend)
       // if courier doesn't have assigned orders get unassigned orders
+
+      const setOrders = async () => {
+        setLoadedOrders(true);
+      };
+
+      setOrders();
     }
   }, [userRole]);
 
   return (
     <div>
-      {userRole === 'Client' && <div>Cliente</div>}
+      {userRole === 'Client' && loadedOrders && (
+        <div>
+          Cliente
+          <h1>Delivered orders:</h1>
+          <div>
+            {deliveredOrders!.map((order, index) => (
+              <div key={index}>
+                <h3>{order.createdAt.toString()}</h3>
+                <h3>{order.products.toString()}</h3>
+              </div>
+            ))}
+          </div>
+          <h1>Undelivered orders:</h1>
+          <div>
+            {undeliveredOrders!.map((order, index) => (
+              <div key={index}>
+                <h3>{order.createdAt.toString()}</h3>
+                <h3>{order.products.toString()}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       {userRole === 'Courier' && <div>Courier</div>}
     </div>
   );

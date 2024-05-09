@@ -75,16 +75,17 @@ export interface OrderCreationResponse {
 }
 
 export interface Order {
-  products: Product[];
   address: Address;
+  _id: string;
+  products: Product[];
   total_price: number;
   status: string;
   user_id: string;
   email: string;
-  _id: string;
   createdAt: Date;
   updatedAt: Date;
   __v: number;
+  courier_id: string;
 }
 
 export interface FetchResponse {

@@ -1,8 +1,6 @@
 import {
   FetchResponse,
-  OrderCreationResponse,
   Product,
-  ProductsReponse,
   SubmitOrderData,
   UserLogin,
   UserRegister,
@@ -13,6 +11,32 @@ import {
 
 export const getAllProducts = async () => {
   const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}products/all`);
+  return res.json();
+};
+
+export const getDeliveredClientOrders = async (user_id: string) => {
+  const res = await fetch(
+    `${
+      import.meta.env.VITE_BACKEND_URL
+    }orders/delivered-user-orders/${user_id}`,
+    {
+      method: 'GET',
+      credentials: 'include',
+    }
+  );
+  return res.json();
+};
+
+export const getUndeliveredClientOrders = async (user_id: string) => {
+  const res = await fetch(
+    `${
+      import.meta.env.VITE_BACKEND_URL
+    }orders/undelivered-user-orders/${user_id}`,
+    {
+      method: 'GET',
+      credentials: 'include',
+    }
+  );
   return res.json();
 };
 
