@@ -64,6 +64,29 @@ export const getUnassignedOrders = async () => {
   return res.json();
 };
 
+export const assignOrderToCourier = async (
+  orderID: string,
+  courierID: string
+): Promise<FetchResponse> => {
+  const res = await fetch(
+    `${import.meta.env.VITE_BACKEND_URL}orders/assign-order`,
+    {
+      method: 'PATCH',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ order_id: orderID, courier_id: courierID }),
+    }
+  );
+  const response = await res.json();
+
+  if (res.status === 200) {
+    return { status: res.status, message: 'Order assigned' };
+  }
+  if (res.status !== 200)
+    return { status: res.status, message: 'Could not assign order' };
+  return response;
+};
+
 export const getAllTypes = async () => {
   const res = await fetch(
     `${import.meta.env.VITE_BACKEND_URL}products/all-products-type`

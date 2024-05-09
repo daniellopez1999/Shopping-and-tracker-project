@@ -2,6 +2,7 @@ import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
+  assignOrderToCourier,
   fetchCourierAssignedOrder,
   getDeliveredClientOrders,
   getUnassignedOrders,
@@ -21,6 +22,22 @@ const Orders = () => {
   const [courierAssignedOrder, setCourierAssignedOrder] =
     useState<Order | null>(null);
   const [unassignedOrders, setUnassignedOrders] = useState<Order[]>();
+
+  const handleAssignOrder = async (
+    orderID: string,
+    courierID: string,
+    orderData: Order
+  ) => {
+    const order = await assignOrderToCourier(orderID, courierID);
+    if (order.status === 200) {
+      window.alert(order.message);
+      setCourierAssignedOrder(orderData);
+      return;
+    } else {
+      window.alert(order.message);
+      return;
+    }
+  };
 
   useEffect(() => {
     if (!user_id) {
@@ -144,6 +161,13 @@ const Orders = () => {
                       <h3>Order ID: {order._id}</h3>
                     </h3>
                     <h3>Created at: {order.createdAt.toString()}</h3>
+                    <button
+                      onClick={() =>
+                        handleAssignOrder(order._id, user_id!, order)
+                      }
+                    >
+                      Assign Order
+                    </button>
                   </div>
                 ))}
               </div>
