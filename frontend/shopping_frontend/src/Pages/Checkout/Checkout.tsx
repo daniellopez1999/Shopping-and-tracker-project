@@ -8,6 +8,7 @@ import {
 } from '../../utils/validators';
 
 import { createOrder } from '../../utils/fetch';
+import { checkIfUserIsLogged } from '../../utils/checkers';
 
 const Checkout: React.FC = () => {
   const navigate = useNavigate();
@@ -22,8 +23,22 @@ const Checkout: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const savedUserID = Cookies.get('user_id')!;
     const savedEmail = Cookies.get('email')!;
+    const savedUsername = Cookies.get('username')!;
+
+    const isUserLoggedIn = checkIfUserIsLogged({
+      user_id: savedUserID,
+      email: savedEmail,
+      username: savedUsername,
+    });
+
+    if (!isUserLoggedIn) {
+      window.alert('Please, log in before trying to do the checkout.');
+      navigate('/sign-in');
+      return;
+    }
 
     const isSubmitValid = validateSubmitOrder({
       products,

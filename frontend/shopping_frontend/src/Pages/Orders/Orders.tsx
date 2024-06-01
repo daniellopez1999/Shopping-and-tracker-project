@@ -114,6 +114,7 @@ const Orders = () => {
           const unassignedOrdrs = await fetchUnassignedOrders();
           setUnassignedOrders(unassignedOrdrs);
           setLoadedOrders(true);
+          return;
         }
       };
 
@@ -150,7 +151,7 @@ const Orders = () => {
         <div>
           Courier
           <div>
-            {courierAssignedOrder != null ? (
+            {courierAssignedOrder != null && loadedOrders ? (
               <div>Assigned Order ID: {courierAssignedOrder._id}</div>
             ) : (
               <div>

@@ -35,6 +35,11 @@ const SelectedProductOverlay: React.FC<SelectedProductProps> = ({
   }, []);
 
   const handleAddProduct = () => {
+    if (quantity == 0) {
+      window.alert('To add a product quantity must be at least 1');
+      return;
+    }
+
     const updatedCart = [...cart];
     const existingItemIndex = updatedCart.findIndex(
       (item) => item._id === selectedProduct!._id
@@ -70,7 +75,16 @@ const SelectedProductOverlay: React.FC<SelectedProductProps> = ({
               +
             </button>
           </div>
-          <button onClick={() => handleAddProduct()}>Add to cart</button>
+          <button
+            onClick={() => handleAddProduct()}
+            disabled={quantity === 0}
+            style={{
+              backgroundColor: quantity === 0 ? 'grey' : '',
+              cursor: quantity === 0 ? 'not-allowed' : '',
+            }}
+          >
+            Add to cart
+          </button>
           <button onClick={() => setSelectedProduct(null)}>Close</button>
         </div>
       </div>
